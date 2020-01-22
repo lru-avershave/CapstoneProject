@@ -9,14 +9,14 @@ Python Dependencies
 ===
 Our project is being built mainly in Python.
 
-Python Packages being used:
-This is including pip packages which are:
-Flask
-http://flask.palletsprojects.com/en/1.1.x/
-Flask-Cors
-Flask-PyMongo
-Flask-Bootstrap
-This is could be added onto depending on what packages we need in the future
++ Python Packages being used:
++ This is including pip packages which are:
++ Flask
++ http://flask.palletsprojects.com/en/1.1.x/
++ Flask-Cors
++ Flask-PyMongo
++ Flask-Bootstrap
++ This is could be added onto depending on what packages we need in the future
 
 Software being used:
 Python
