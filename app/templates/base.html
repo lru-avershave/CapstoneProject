@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Flask Example</title>
-    {% block head %}
-    {% endblock head %}
-</head>
-<body>
-    {% block body %}
-    {% endblock body %}
-</body>
-</html>
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+Testing Flask
+{% endblock title %}
+
+{% block content %}
+    <h1>Hello!</h1>
+{% endblock content %}
+
+{% block scripts %}
+{{super()}}
+{% endblock scripts %}
+
+{% block styles %}
+{{super()}}
+{% endblock styles %}

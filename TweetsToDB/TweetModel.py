@@ -5,5 +5,4 @@ class Tweet(Document):
     tweetText = StringField()
     creatorFollowers = IntField()
     mentions = ListField()
-    createLocation = StringField()
     dateCreated = DateTimeField()
