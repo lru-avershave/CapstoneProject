@@ -18,6 +18,7 @@ Python Packages being used:
 + Flask-PyMongo
 + Flask-Bootstrap
 + Pandas
++ MongoEngine
 + python-dotenv
 + This is could be added onto depending on what packages we need in the future
 
