@@ -1,0 +1,53 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+<h1 style="text-align: center;">Tweet Basic Stats</h1>
+{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <!--Creates the first column for choosing type of statistics-->
+        <div class = "column">    
+            <h3>Choose what type of statistics to run:</h3>
+            <input type = "radio" name = "statistics" value = "basic"> Basic<br>
+            <input type = "radio" name = "statistics" value = "descriptive"> Descriptive<br>
+            <input type = "button" name = "run_stats" value = "Run">
+        </div>
+    
+        <!--Creates the second column for filtering-->
+        <div class = "column">
+            <h3>Filters:</h3>
+            <div class="row">
+                <input type = "checkbox" name = "filter_term" value = "bool_term"> Term:   
+                <input type = "text" name = "input_term" value ="">
+            </div>
+            <div class="row">
+                <input type = "checkbox" name = "filter_time" value = "bool_time"> Time:
+                <input type = "time" name = "input_time" value ="">
+            </div>
+            <div class="row">
+                <input type = "checkbox" name = "filter_location" value = "bool_location"> Location:   
+                <input type = "text" name = "input_location" value ="">
+            </div>
+            <div class="row">
+                <input type = "checkbox" name = "filter_profile" value = "bool_profile"> Profile:   
+                <input type = "text" name = "input_profile" value ="">
+            </div>
+        </div>
+    </div>
+
+    <!-- Creates the load old output row -->
+    <div class = "row">    
+        <h3>Load a Previous Output:</h3>
+        <input type = "text" name = "old_output" value = "">
+        <input type = "button" name = "load_old_output" value = "Load">
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+{{super()}}
+{% endblock scripts %}
+
+{% block styles %}
+{{super()}}
+{% endblock styles %}
