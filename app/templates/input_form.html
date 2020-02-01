@@ -5,13 +5,14 @@ Tweet Basic Stats Inputs
 {% endblock title %}
 
 {% block content %}
+<form action="#" method="POST">
 <div class = "row">
         <!--Creates the first column for choosing type of statistics-->
         <div class = "column">    
             <h3> Choose what type of statistics to run:</h3 > 
-            <input type = "radio" name = "statistics" value = "basic"> Basic<br>
-            <input type = "radio" name = "statistics" value = "descriptive"> Descriptive<br>
-            <input type = "button" name = "run_stats" value = "Run">
+            <input type = "radio" name = "statistics" id = "basic" value = "basic"> Basic<br>
+            <input type = "radio" name = "statistics" id = "descriptive" value = "descriptive"> Descriptive<br>
+            <input type = "submit" name = "run_stats" value = "Run">
         </div>
     
         <!--Creates the second column for filtering-->
@@ -35,7 +36,8 @@ Tweet Basic Stats Inputs
             </div>
         </div>
     </div>
-    
+</form>
+
     <br>
     <br>
     <br>
@@ -47,6 +49,7 @@ Tweet Basic Stats Inputs
         <input type = "text" name = "old_output" value = "">
         <input type = "button" name = "load_old_output" value = "Load">
     </div>
+
 {% endblock content %}
 
 {% block scripts %}
