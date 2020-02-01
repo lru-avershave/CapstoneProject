@@ -1,0 +1,25 @@
+/* Four column style */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  height: 300px;
+}
+
+.row{
+  padding-left: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout  */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}

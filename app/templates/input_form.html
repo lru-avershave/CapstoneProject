@@ -1,17 +1,18 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-<h1 style="text-align: center;">Tweet Basic Stats</h1>
+Tweet Basic Stats Inputs
 {% endblock title %}
 
 {% block content %}
-    <div class="row">
+<form action="#" method="POST">
+<div class = "row">
         <!--Creates the first column for choosing type of statistics-->
         <div class = "column">    
-            <h3>Choose what type of statistics to run:</h3>
-            <input type = "radio" name = "statistics" value = "basic"> Basic<br>
-            <input type = "radio" name = "statistics" value = "descriptive"> Descriptive<br>
-            <input type = "button" name = "run_stats" value = "Run">
+            <h3> Choose what type of statistics to run:</h3 > 
+            <input type = "radio" name = "statistics" id = "basic" value = "basic"> Basic<br>
+            <input type = "radio" name = "statistics" id = "descriptive" value = "descriptive"> Descriptive<br>
+            <input type = "submit" name = "run_stats" value = "Run">
         </div>
     
         <!--Creates the second column for filtering-->
@@ -35,13 +36,20 @@
             </div>
         </div>
     </div>
+</form>
 
-    <!-- Creates the load old output row -->
-    <div class = "row">    
-        <h3>Load a Previous Output:</h3>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class = "row">
+        <!-- Creates the load old output row -->
+        <h3> Load a Previous Output:</h3> 
         <input type = "text" name = "old_output" value = "">
         <input type = "button" name = "load_old_output" value = "Load">
     </div>
+
 {% endblock content %}
 
 {% block scripts %}
@@ -49,5 +57,6 @@
 {% endblock scripts %}
 
 {% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/input_styles.css') }}">
 {{super()}}
 {% endblock styles %}
