@@ -1,9 +1,71 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-<h1 style="text-align: center;">Tweet Basic Stats</h1>
+Tweet Basic Stats Output ~ Basic
 {% endblock title %}
 
 {% block content %}
-SAMPLE
+<div class = "row">
+    <h1 style="text-align: center;">Data (Basic Statistics)</h1>
+</div>
+
+<div class = "row">
+    <div class = "column">
+        Generated Output ID:
+        <br>
+        <label id = output_id>000-000-000</label>
+        <br>
+        <input type = button name = "return" value = "Return to Input">    
+    </div>
+
+    <div class = "column">
+        This is for overall data
+        <br>
+        <label>DATA</label>
+    </div>
+
+    <div class = "column">
+        This is for graph
+        <br>
+        <img width = 50px height = 50px>
+    </div>
+
+    <div class = "column">
+        this is for filters used
+        <br>
+        <label>Filters</label>
+    </div>
+</div>
+
+<div class = row>
+    <table>
+        <tr>
+            <th>heading 1</th>
+            <th>heading 2</th>
+            <th>heading 3</th>
+            <th>heading 4</th>
+            <th>heading 5</th>
+            <th>heading 6</th>
+            <th>heading 7</th>
+            <th>heading 8</th>
+        </tr>
+        <tr>
+
+        </tr>
+    </table>
+</div>
+
+<div class = "row">
+    <div class = "column">
+        View specific Tweet area
+    </div>
+    <div class = "column">
+        Save to file area
+    </div>
+</div>
 {% endblock content %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output_basic_styles.css') }}">
+{{super()}}
+{% endblock styles %}

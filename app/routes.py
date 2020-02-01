@@ -3,4 +3,4 @@ from app import app
 
 @app.route('/')
 def index():
-   return render_template('input_form.html')
+   return render_template('output_basic_form.html')
