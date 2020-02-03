@@ -5,58 +5,59 @@ Tweet Basic Stats Inputs
 {% endblock title %}
 
 {% block content %}
-<form action="#" method="POST">
-<div class = "row">
-        <!--Creates the first column for choosing type of statistics-->
-        <div class = "column">    
-            <h3> Choose what type of statistics to run:</h3 > 
-            <input type = "radio" name = "statistics" id = "basic" value = "basic"> Basic<br>
-            <input type = "radio" name = "statistics" id = "descriptive" value = "descriptive"> Descriptive<br>
-            <input type = "submit" name = "run_stats" value = "Run">
+<div class="container">
+    <form action="#" method="POST">
+        <div class = "row">
+                <!--Creates the first column for choosing type of statistics-->
+                <div class = "col-lg-6">    
+                    <h3> Choose what type of statistics to run:</h3 > 
+                    <input type = "radio" name = "statistics" id = "basic" value = "basic"> Basic<br>
+                    <input type = "radio" name = "statistics" id = "descriptive" value = "descriptive"> Descriptive<br>
+                    <input type = "submit" name = "run_stats" value = "Run">
+                </div>
+            
+                <!--Creates the second column for filtering-->
+                <div class = "col-lg-6">
+                    <h3>Filters:</h3>
+                    <div class="row">
+                        <input type = "checkbox" name = "filter_term" value = "bool_term"> Term:   
+                        <input type = "text" name = "input_term" value ="">
+                    </div>
+                    <div class="row">
+                        <input type = "checkbox" name = "filter_time" value = "bool_time"> Time:
+                        <input type = "time" name = "input_time" value ="">
+                    </div>
+                    <div class="row">
+                        <input type = "checkbox" name = "filter_location" value = "bool_location"> Location:   
+                        <input type = "text" name = "input_location" value ="">
+                    </div>
+                    <div class="row">
+                        <input type = "checkbox" name = "filter_profile" value = "bool_profile"> Profile:   
+                        <input type = "text" name = "input_profile" value ="">
+                    </div>
+                </div>
         </div>
-    
-        <!--Creates the second column for filtering-->
-        <div class = "column">
-            <h3>Filters:</h3>
-            <div class="row">
-                <input type = "checkbox" name = "filter_term" value = "bool_term"> Term:   
-                <input type = "text" name = "input_term" value ="">
-            </div>
-            <div class="row">
-                <input type = "checkbox" name = "filter_time" value = "bool_time"> Time:
-                <input type = "time" name = "input_time" value ="">
-            </div>
-            <div class="row">
-                <input type = "checkbox" name = "filter_location" value = "bool_location"> Location:   
-                <input type = "text" name = "input_location" value ="">
-            </div>
-            <div class="row">
-                <input type = "checkbox" name = "filter_profile" value = "bool_profile"> Profile:   
-                <input type = "text" name = "input_profile" value ="">
-            </div>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
 
-    <br>
-    <br>
-    <br>
-    <br>
-
+<div class="container">
     <div class = "row">
         <!-- Creates the load old output row -->
         <h3> Load a Previous Output:</h3> 
         <input type = "text" name = "old_output" value = "">
         <input type = "button" name = "load_old_output" value = "Load">
     </div>
+</div>
 
 {% endblock content %}
 
 {% block scripts %}
-{{super()}}
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 {% endblock scripts %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/input_styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/input_styles.css') }}">
 {{super()}}
 {% endblock styles %}
