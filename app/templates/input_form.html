@@ -6,7 +6,7 @@ Tweet Basic Stats Inputs
 
 {% block content %}
 <div class="container">
-    <form action="#" method="POST">
+    <form action="{{ url_for('stats') }}" method="POST">
         <div class = "row">
                 <!--Creates the first column for choosing type of statistics-->
                 <div class = "col-lg-6">    
@@ -41,12 +41,14 @@ Tweet Basic Stats Inputs
 </div>
 
 <div class="container">
-    <div class = "row">
-        <!-- Creates the load old output row -->
-        <h3> Load a Previous Output:</h3> 
-        <input type = "text" name = "old_output" value = "">
-        <input type = "button" name = "load_old_output" value = "Load">
-    </div>
+    <form action="{{ url_for('id') }}" method="POST">
+        <div class = "row">
+            <!-- Creates the load old output row -->
+            <h3> Load a Previous Output:</h3> 
+            <input type = "text" name = "old_output" value = "">
+            <input type = "submit" name = "load_old_output" value = "Load">
+        </div>
+    </form>
 </div>
 
 {% endblock content %}

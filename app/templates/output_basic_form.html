@@ -13,9 +13,9 @@ Tweet Basic Stats Output ~ Basic
     <div class = "column">
         Generated Output ID:
         <br>
-        <label id = output_id>000-000-000</label>
+        <label id = output_id>{{ _id }}</label>
         <br>
-        <input type = button name = "return" value = "Return to Input">    
+        <input type = button name = "return" value = "Return to Input">
     </div>
 
     <div class = "column">
@@ -73,6 +73,5 @@ Tweet Basic Stats Output ~ Basic
 {% endblock scripts %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/output_basic_styles.css') }}">
 {{super()}}
 {% endblock styles %}
