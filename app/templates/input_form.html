@@ -6,52 +6,60 @@ Tweet Basic Stats Inputs
 
 {% block content %}
 <div class="container">
-    <form action="{{ url_for('stats') }}" method="POST">
-        <div class = "row">
+    <div action="{{ url_for('stats') }}" method="POST">
+        <div class = "card-deck">
+            <div class = "card mb-4">
             <!--Creates the first column for choosing type of statistics-->
-            <div class = "col-lg-6">    
-                <h3> Choose what type of statistics to run:</h3 > 
-                <input type = "radio" name = "statistics" id = "basic" checked=true value = "basic"> Basic<br>
-                <input type = "radio" name = "statistics" id = "descriptive" value = "descriptive"> Descriptive<br>
-                <input type = "submit" name = "run_stats" value = "Run">
-                <div class="container">
-                    <form action="{{ url_for('id') }}" method="POST">
-                        <div class = "row">
-                            <!-- Creates the load old output row -->
-                            <h3> Load a Previous Output:</h3> 
-                            <input type = "text" name = "old_output" value = "">
-                            <input type = "submit" name = "load_old_output" value = "Load">
+                <div class = "card-body">
+                    <div class = "col-lg-6">    
+                        <h3> Choose what type of statistics to run:</h3 > 
+                        <input type = "radio" name = "statistics" id = "basic" checked=true value = "basic"> Basic<br>
+                        <input type = "radio" name = "statistics" id = "descriptive" value = "descriptive"> Descriptive<br>
+                        <input type = "submit" name = "run_stats" value = "Run">
+                        <div class="container">
+                            <form action="{{ url_for('id') }}" method="POST">
+                                <div class = "row">
+                                    <!-- Creates the load old output row -->
+                                    <h3> Load a Previous Output:</h3> 
+                                    <input type = "text" name = "old_output" value = "">
+                                    <input type = "submit" name = "load_old_output" value = "Load">
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>            
-            </div>
-        
-           
-            <!--Creates the second column for filtering-->
-            <div class = "col-lg-6">
-                <h3>Filters</h3>
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapse_filter" id = collapse_button role="button" aria-expanded="false" aria-controls="collapseExample">Expand</a>
-                <div class="collapse" id="collapse_filter">
-                    <div class="card card-body">
-                        <div class="row">
-                            <input type = "checkbox" name = "filter_term" value = "bool_term"> Term:       
-                            <input type = "text" name = "input_term" value ="">
-                        </div>
-                        <div class="row">
-                            <input type = "checkbox" name = "filter_time" value = "bool_time"> Time:       
-                            <input type = "time" name = "input_time" value ="">
-                        </div>
-                        <div class="row">
-                            <input type = "checkbox" name = "filter_location" value = "bool_location"> Location:   
-                            <input type = "text" name = "input_location" value ="">
-                        </div>
-                        <div class="row">
-                            <input type = "checkbox" name = "filter_profile" value = "bool_profile"> Profile:    
-                            <input type = "text" name = "input_profile" value ="">
+                    </div>
+                    </div>
+                </div>  
+            <div class = "card mb-4">
+                    <!--Creates the first column for choosing type of statistics-->
+                <div class = "card-body">          
+                <!--Creates the second column for filtering-->
+                    <div class = "col-lg-6">
+                        <h3>Filters</h3>
+                        <a class="btn btn-primary" data-toggle="collapse" href="#collapse_filter" id = collapse_button role="button" aria-expanded="false" aria-controls="collapseExample">Expand</a>
+                        <div class="collapse" id="collapse_filter">
+                            <div class="card card-body">
+                                <div class="row">
+                                    <input type = "checkbox" name = "filter_term" value = "bool_term"> Term:       
+                                    <input type = "text" name = "input_term" value ="">
+                                </div>
+                                <div class="row">
+                                    <input type = "checkbox" name = "filter_time" value = "bool_time"> Time:       
+                                    <input type = "time" name = "input_time" value ="">
+                                </div>
+                                <div class="row">
+                                    <input type = "checkbox" name = "filter_location" value = "bool_location"> Location:   
+                                    <input type = "text" name = "input_location" value ="">
+                                </div>
+                                <div class="row">
+                                    <input type = "checkbox" name = "filter_profile" value = "bool_profile"> Profile:    
+                                    <input type = "text" name = "input_profile" value ="">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </form>
 </div>
