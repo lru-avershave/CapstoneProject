@@ -6,12 +6,15 @@ Tweet Basic Stats Inputs
 
 {% block content %}
 <div class="container">
-    <div action="{{ url_for('stats') }}" method="POST">
+    <div class = "row d-flex justify-content-center">
+        <h2 style="text-align: center;">Tweet Basic Stats</h2>
+    </div>
+    <form action="{{ url_for('stats') }}" method="POST">
         <div class = "card-deck">
             <div class = "card mb-4">
             <!--Creates the first column for choosing type of statistics-->
-                <div class = "card-body">
-                    <div class = "col-lg-6">    
+                <div class = "card-body text-center">
+                    <div class = "col-lg-12">    
                         <h3> Choose what type of statistics to run:</h3 > 
                         <input type = "radio" name = "statistics" id = "basic" checked=true value = "basic"> Basic<br>
                         <input type = "radio" name = "statistics" id = "descriptive" value = "descriptive"> Descriptive<br>
@@ -19,16 +22,6 @@ Tweet Basic Stats Inputs
                         <br>
                         <br>
                         <br>
-                        <div class="container">
-                            <form action="{{ url_for('id') }}" method="POST">
-                                <div class = "row">
-                                    <!-- Creates the load old output row -->
-                                    <h3> Load a Previous Output:</h3> 
-                                    <input type = "text" name = "old_output" value = "">
-                                    <input type = "submit" name = "load_old_output" value = "Load">
-                                </div>
-                            </form>
-                        </div>
                     </div>
                     </div>
                 </div>  
@@ -75,6 +68,20 @@ Tweet Basic Stats Inputs
                 </div>
             </div>
         </div>
+    </form>
+        <div class ="row d-flex justify-content-center">
+            <div class = "card mb-4">
+                <div class = "card-body text-center">
+                    <form action="{{ url_for('id') }}" method="POST">
+                        <!-- Creates the load old output row -->
+                        <h3> Load a Previous Output:</h3>
+                        <input type = "text" name = "old_output" value = "">
+                        <br>
+                        <br>
+                        <input type = "submit" name = "load_old_output" value = "Load">
+                  </form>
+                </div>
+            </div>
         </div>
     </form>
 </div>
