@@ -16,6 +16,9 @@ Tweet Basic Stats Inputs
                         <input type = "radio" name = "statistics" id = "basic" checked=true value = "basic"> Basic<br>
                         <input type = "radio" name = "statistics" id = "descriptive" value = "descriptive"> Descriptive<br>
                         <input type = "submit" name = "run_stats" value = "Run">
+                        <br>
+                        <br>
+                        <br>
                         <div class="container">
                             <form action="{{ url_for('id') }}" method="POST">
                                 <div class = "row">
@@ -36,23 +39,36 @@ Tweet Basic Stats Inputs
                         <h3>Filters</h3>
                         <a class="btn btn-primary" data-toggle="collapse" href="#collapse_filter" id = collapse_button role="button" aria-expanded="false" aria-controls="collapseExample">Expand</a>
                         <div class="collapse" id="collapse_filter">
-                            <div class="card card-body">
-                                <div class="row">
-                                    <input type = "checkbox" name = "filter_term" value = "bool_term"> Term:       
-                                    <input type = "text" name = "input_term" value ="">
-                                </div>
-                                <div class="row">
-                                    <input type = "checkbox" name = "filter_time" value = "bool_time"> Time:       
-                                    <input type = "datetime-local" name = "input_time" value ="">
-                                </div>
-                                <div class="row">
-                                    <input type = "checkbox" name = "filter_location" value = "bool_location"> Location:   
-                                    <input type = "text" name = "input_location" value ="">
-                                </div>
-                                <div class="row">
-                                    <input type = "checkbox" name = "filter_profile" value = "bool_profile"> Profile:    
-                                    <input type = "text" name = "input_profile" value ="">
-                                </div>
+                            <div class="row">
+                                <input type = "checkbox" name = "filter_term" value = "bool_term"> Term:       
+                                <input type = "text" name = "input_term" value ="">
+                                <select id ="term_options">
+                                    <option>sample</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <input type = "checkbox" name = "filter_time" value = "bool_time"> Time:       
+                                <input type = "datetime-local" name = "input_time" value ="">
+                                <select id ="time_options">
+                                    <option>sample</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <input type = "checkbox" name = "filter_location" value = "bool_location"> Location:   
+                                <input type = "text" name = "input_location" value ="">
+                                <select id ="location_options">
+                                    <option>sample</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <input type = "checkbox" name = "filter_profile" value = "bool_profile"> Profile:    
+                                <input type = "text" name = "input_profile" value ="">
+                                <select id ="profile_options">
+                                    <option>sample</option>
+                                </select>
                             </div>
                         </div>
                     </div>
