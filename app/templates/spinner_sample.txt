@@ -1,0 +1,6 @@
+<div id="mdb-preloader" class="flex-center">
+  <div id="preloader-markup">
+  </div>
+</div>
+
+--> Goes after the body tag of the html
