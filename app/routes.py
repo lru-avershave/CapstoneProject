@@ -44,8 +44,3 @@ def id():
       return redirect(url_for('basic', _id=_id))
    if reqPage[0]['pageType'] == "descriptive":
       return redirect((url_for('descriptive', _id=_id)))
-
-@app.route('/test', methods=['GET'])
-def test():
-   reqTweet = Tweet.objects().to_json()
-   return reqTweet

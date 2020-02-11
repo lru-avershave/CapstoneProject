@@ -32,7 +32,7 @@ Tweet Basic Stats Output ~ Basic
                         <br>
                         <!--Scroll field for the data-->
                         <div style="height:200px;width:250px;border:1px;overflow:auto;">
-                            <label id = "overall_data">This is where the overall data will go and it will be nicely alligned in afbadiubdfa<br>ibffffffffffffffffff<br>ffffffffffffffff<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX</label>
+                            <label id = "overall_data"></label>
                         </div>
                     </div>
                 </div>
@@ -102,12 +102,12 @@ Tweet Basic Stats Output ~ Basic
                         <td>{{ document.tweetCreator }}</td>
                         <td>{{ document.tweetText|length }}</td>
                         <td>{{ document.creatorFollowers }}</td>
-                        <td>Filler for Location</td>
+                        <td>{{ document.location }}</td>
                         <td>{{ document.dateCreated }}</td>
                         <td>{{ document.tweetLikes }}</td>
                         <td>{{ document.tweetRe }}</td>
                      </tr>
-                {% endfor %}
+                    {% endfor %}
                 </tbody>
                 <tfoot>
                     <tr>
