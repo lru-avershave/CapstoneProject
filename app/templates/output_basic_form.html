@@ -42,10 +42,10 @@ Tweet Basic Stats Output ~ Basic
                     <div class = "card-body">         
                         <h5>Filters Used:</h4>
                         <br>
-                        <label id = "filters_used">Term: XXXXXXXXXXXXXX
-                            <br>Time: 00:00:00XX
-                            <br>Location: XXXXXXXXXXXXXX
-                            <br>Profile: XXXXXXXXXXXXXX
+                        <label id = "filters_used">Term: {{ term }}
+                            <br>Time: {{ time }}
+                            <br>Location: {{ location }}
+                            <br>Profile: {{ profile }}
                         </label>
                    </div>
                 </div>
@@ -96,76 +96,18 @@ Tweet Basic Stats Output ~ Basic
                     </tr>
                 </thead>
                 <tbody>
+                    {% for document in tweets %}
                     <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>123</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
+                        <td>{{ document.tweetID }}</td>
+                        <td>{{ document.tweetCreator }}</td>
+                        <td>{{ document.tweetText|length }}</td>
+                        <td>{{ document.creatorFollowers }}</td>
+                        <td>Filler for Location</td>
+                        <td>{{ document.dateCreated }}</td>
+                        <td>{{ document.tweetLikes }}</td>
+                        <td>{{ document.tweetRe }}</td>
+                     </tr>
+                {% endfor %}
                 </tbody>
                 <tfoot>
                     <tr>
