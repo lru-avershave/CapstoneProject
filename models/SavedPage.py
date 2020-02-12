@@ -4,5 +4,5 @@ class SavedPage(Document):
     pageType = StringField()
     filterTerm = StringField()
     filterTime = StringField()
-    filterLocation = StringField()
-    filterProfile = StringField()
+    location = StringField()
+    tweetCreator = StringField()

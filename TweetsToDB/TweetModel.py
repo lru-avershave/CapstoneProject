@@ -10,3 +10,10 @@ class Tweet(Document):
     mentions = ListField()
     location = StringField()
     dateCreated = DateTimeField()
+
+    meta = {'indexes': [
+        {'fields': ['$tweetText']},
+        'default_language': 'english',
+        'weights': {'tweetText': 10}
+        }
+    ]}

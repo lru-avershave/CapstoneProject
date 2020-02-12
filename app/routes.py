@@ -4,6 +4,7 @@ from models.SavedPage import SavedPage
 from TweetsToDB.TweetModel import Tweet
 from mongoengine import *
 import pandas as pd
+import json
 
 
 @app.route('/',methods=["GET", "POST"])
@@ -18,7 +19,7 @@ def stats():
    filter_time = request.form.get('input_time')
    filter_location = request.form.get('input_location')
    filter_profile = request.form.get('input_profile')
-   newPage = SavedPage(pageType=stat_type, filterTerm=filter_term, filterTime=filter_time, filterLocation=filter_location, filterProfile=filter_profile).save()
+   newPage = SavedPage(pageType=stat_type, filterTerm=filter_term, filterTime=filter_time, location=filter_location, tweetCreator=filter_profile).save()
    if stat_type == "basic":
       return redirect((url_for('basic', _id=newPage.id)))
    else:
@@ -26,10 +27,48 @@ def stats():
 
 @app.route('/basic/<_id>', methods=["GET", "POST"])
 def basic(_id):
-   reqPage = SavedPage.objects(id=_id)
-   reqTweet = Tweet.objects()
-   return render_template('output_basic_form.html', _id=_id, term=reqPage[0]['filterTerm'], time=pd.to_datetime(reqPage[0]['filterTime']), 
-                           location=reqPage[0]['filterLocation'], profile=reqPage[0]['filterProfile'], tweets=reqTweet)
+   reqPage = list(SavedPage.objects(id=_id).aggregate([
+      {
+         "$project": {
+            "_id": "$$REMOVE",
+            "pageType": "$$REMOVE",
+            "filterTerm": {
+               "$cond": {
+                  "if": { "$eq": [ "", "$filterTerm" ]},
+                  "then": "$$REMOVE",
+                  "else": "$filterTerm"
+               }
+            },
+            "filterTime": {
+               "$cond": {
+                  "if": { "$eq": [ "", "$filterTime" ]},
+                  "then": "$$REMOVE",
+                  "else": "$filterTime"
+               }
+            },
+            "location": {
+               "$cond": {
+                  "if": { "$eq": [ "", "$location" ]},
+                  "then": "$$REMOVE",
+                  "else": "$location"
+               }
+            },
+            "tweetCreator": {
+               "$cond": {
+                  "if": { "$eq": [ "", "$tweetCreator" ]},
+                  "then": "$$REMOVE",
+                  "else": "$tweetCreator"
+               }
+            }
+         }
+      }
+   ]))
+   searchStrings = reqPage[0]
+   # delete this later when you implement a search
+   if "filterTerm" in searchStrings:
+      del searchStrings["filterTerm"]
+   reqTweet = Tweet.objects(__raw__ = searchStrings)
+   return render_template('output_basic_form.html', _id=_id, tweets=reqTweet, filters=reqPage[0])
 
 @app.route('/descriptive/<_id>',methods=["GET", "POST"])
 def descriptive(_id):
