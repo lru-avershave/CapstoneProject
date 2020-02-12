@@ -12,8 +12,8 @@ class Tweet(Document):
     dateCreated = DateTimeField()
 
     meta = {'indexes': [
-        {'fields': ['$tweetText']},
-        'default_language': 'english',
-        'weights': {'tweetText': 10}
+        {'fields': ['$tweetText'],
+            'default_language': 'english',
+            'weights': {'tweetText': 10}
         }
     ]}

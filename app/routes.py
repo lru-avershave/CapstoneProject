@@ -63,11 +63,14 @@ def basic(_id):
          }
       }
    ]))
-   searchStrings = reqPage[0]
-   # delete this later when you implement a search
+   searchStrings = reqPage[0].copy()
+   # SEARCH
    if "filterTerm" in searchStrings:
+      filterTerm = searchStrings["filterTerm"]
       del searchStrings["filterTerm"]
-   reqTweet = Tweet.objects(__raw__ = searchStrings)
+      reqTweet = Tweet.objects(__raw__ = searchStrings).search_text(filterTerm)
+   else:
+      reqTweet = Tweet.objects(__raw__ = searchStrings)
    return render_template('output_basic_form.html', _id=_id, tweets=reqTweet, filters=reqPage[0])
 
 @app.route('/descriptive/<_id>',methods=["GET", "POST"])
