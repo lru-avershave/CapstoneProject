@@ -32,7 +32,7 @@ Tweet Basic Stats Output ~ Basic
                         <br>
                         <!--Scroll field for the data-->
                         <div style="height:200px;width:250px;border:1px;overflow:auto;">
-                            <label id = "overall_data">This is where the overall data will go and it will be nicely alligned in afbadiubdfa<br>ibffffffffffffffffff<br>ffffffffffffffff<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX<br>XXXXXXXXXXXXXX</label>
+                            <label id = "overall_data"></label>
                         </div>
                     </div>
                 </div>
@@ -42,10 +42,12 @@ Tweet Basic Stats Output ~ Basic
                     <div class = "card-body">         
                         <h5>Filters Used:</h4>
                         <br>
-                        <label id = "filters_used">Term: XXXXXXXXXXXXXX
-                            <br>Time: 00:00:00XX
-                            <br>Location: XXXXXXXXXXXXXX
-                            <br>Profile: XXXXXXXXXXXXXX
+                        <label id = "filters_used">
+                        <ul>
+                        {% for key, value in filters.items() %}
+                        <li>{{ value }}</li>
+                        {% endfor %}
+                        </ul>
                         </label>
                    </div>
                 </div>
@@ -96,76 +98,18 @@ Tweet Basic Stats Output ~ Basic
                     </tr>
                 </thead>
                 <tbody>
+                    {% for document in tweets %}
                     <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>123</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                        <td>xxxxxxxxx</td>
-                    </tr>
+                        <td>{{ document.tweetID }}</td>
+                        <td>{{ document.tweetCreator }}</td>
+                        <td>{{ document.tweetText|length }}</td>
+                        <td>{{ document.creatorFollowers }}</td>
+                        <td>{{ document.location }}</td>
+                        <td>{{ document.dateCreated }}</td>
+                        <td>{{ document.tweetLikes }}</td>
+                        <td>{{ document.tweetRe }}</td>
+                     </tr>
+                    {% endfor %}
                 </tbody>
                 <tfoot>
                     <tr>
