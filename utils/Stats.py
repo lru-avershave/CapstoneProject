@@ -21,3 +21,13 @@ class Stats:
 
     def modeRetweets(self):
         print(self.df['tweetRe'].mode())
+
+
+# def statsByCity(term, other filters): 
+#     TweetsByTerm+Filters+Sort
+#     Total --> Save As Row (Number of tweets, Mean, Median, Mode, blahblahlbah)
+#     LenList
+#     Loop Total for City --> Append data for specific city to a list --> Save As Row
+#     Sort Profile
+#     Loop Total for Profiles --> Use the same logic for city
+

@@ -13,7 +13,6 @@ def index():
 
 @app.route('/stats', methods=['POST'])
 def stats():
-   print(request.form)
    stat_type = request.form.get('statistics')
    filter_term = request.form.get('input_term')
    filter_time = request.form.get('input_time')
@@ -64,7 +63,6 @@ def basic(_id):
       }
    ]))
    searchStrings = reqPage[0].copy()
-   # SEARCH
    if "filterTerm" in searchStrings:
       filterTerm = searchStrings["filterTerm"]
       del searchStrings["filterTerm"]
@@ -86,3 +84,11 @@ def id():
       return redirect(url_for('basic', _id=_id))
    if reqPage[0]['pageType'] == "descriptive":
       return redirect((url_for('descriptive', _id=_id)))
+
+@app.route('/admin/login', methods=['GET'])
+def adminlogin():
+   return render_template('admin_login_form.html')
+
+@app.route('/admin/landing', methods=['GET'])
+def adminlanding():
+   return render_template('admin_form.html')

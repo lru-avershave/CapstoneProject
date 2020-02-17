@@ -24,5 +24,3 @@ for i in data['statuses']:
     newTweet.save()
 
 newTweet.save()
-# Stores screen name into MongoDB
-# newTweet = Tweet(tweetCreator=data['statuses'][0]['user']['screen_name']).save()
