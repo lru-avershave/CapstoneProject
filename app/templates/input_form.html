@@ -82,7 +82,17 @@ Tweet Basic Stats Inputs
                 </div>
             </div>
         </div>
-    </form>
+
+        <div class ="row d-flex justify-content-right">
+            <div class = "card mb-4">
+                <div class = "card-body text-center">
+                    <form action="{{ url_for('adminlogin') }}" method="POST">
+                        <!-- Creates the load old output row -->
+                        <input type = "submit" name = "admin_login" value = "Login in as Adminstrator">
+                  </form>
+                </div>
+            </div>
+        </div>
 </div>
 
 
