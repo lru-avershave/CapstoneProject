@@ -32,7 +32,14 @@ Tweet Basic Stats Output ~ Basic
                         <br>
                         <!--Scroll field for the data-->
                         <div style="height:200px;width:250px;border:1px;overflow:auto;">
-                            <label id = "overall_data"></label>
+                            <label id = "overall_data">
+                                <Ul>
+                                    <li>Total: {{tweets|length}}</li>
+                                    {% for loc in locations %}
+                                        <li>{{loc}}</li>
+                                    {% endfor %}
+                                </Ul>
+                            </label>
                         </div>
                     </div>
                 </div>
