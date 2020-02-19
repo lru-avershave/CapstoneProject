@@ -85,10 +85,10 @@ def id():
    if reqPage[0]['pageType'] == "descriptive":
       return redirect((url_for('descriptive', _id=_id)))
 
-@app.route('/admin/login', methods=['GET'])
+@app.route('/admin/login', methods=['GET', 'POST'])
 def adminlogin():
    return render_template('admin_login_form.html')
 
-@app.route('/admin/landing', methods=['GET'])
+@app.route('/admin/landing', methods=['GET', 'POST'])
 def adminlanding():
    return render_template('admin_form.html')
