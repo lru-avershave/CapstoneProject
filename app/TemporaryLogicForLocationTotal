@@ -1,0 +1,9 @@
+for tweet in reqTweet
+      curLocation = tweet.location
+      if(curLocation == tempLocation)
+         counter++
+      else:
+         if counter != 0
+            locationTotals = tempLocation + ": " + counter
+            tempLocation = curLocation
+         counter = 1
