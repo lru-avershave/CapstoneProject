@@ -4,8 +4,9 @@ import ImportText as it
 
 class main():
 
-try:
-    main()
-except KeyboardInterrupt:
-    print("Interrupted Main")
-    exit(0)
+    try:
+        dbConnection
+        it
+    except KeyboardInterrupt:
+        print("Interrupted Main")
+        exit(0)
