@@ -5,6 +5,8 @@ from TweetsToDB.TweetModel import Tweet
 from mongoengine import *
 import pandas as pd
 import json
+from utils.Tweet import GetTweet
+from utils.Stats import statTweets
 
 
 @app.route('/',methods=["GET", "POST"])
@@ -26,54 +28,12 @@ def stats():
 
 @app.route('/basic/<_id>', methods=["GET", "POST"])
 def basic(_id):
-   reqPage = list(SavedPage.objects(id=_id).aggregate([
-      {
-         "$project": {
-            "_id": "$$REMOVE",
-            "pageType": "$$REMOVE",
-            "filterTerm": {
-               "$cond": {
-                  "if": { "$eq": [ "", "$filterTerm" ]},
-                  "then": "$$REMOVE",
-                  "else": "$filterTerm"
-               }
-            },
-            "filterTime": {
-               "$cond": {
-                  "if": { "$eq": [ "", "$filterTime" ]},
-                  "then": "$$REMOVE",
-                  "else": "$filterTime"
-               }
-            },
-            "location": {
-               "$cond": {
-                  "if": { "$eq": [ "", "$location" ]},
-                  "then": "$$REMOVE",
-                  "else": "$location"
-               }
-            },
-            "tweetCreator": {
-               "$cond": {
-                  "if": { "$eq": [ "", "$tweetCreator" ]},
-                  "then": "$$REMOVE",
-                  "else": "$tweetCreator"
-               }
-            }
-         }
-      }
-   ]))
-   searchStrings = reqPage[0].copy()
-   if "filterTerm" in searchStrings:
-      filterTerm = searchStrings["filterTerm"]
-      del searchStrings["filterTerm"]
-      reqTweet = Tweet.objects(__raw__ = searchStrings).search_text(filterTerm)
-   else:
-      reqTweet = Tweet.objects(__raw__ = searchStrings)
+   reqTweet, reqPage = GetTweet(_id)
    return render_template('output_basic_form.html', _id=_id, tweets=reqTweet, filters=reqPage[0])
 
 @app.route('/descriptive/<_id>',methods=["GET", "POST"])
 def descriptive(_id):
-   reqPage = SavedPage.objects(id=_id)
+   reqTweet, reqPage = GetTweet(_id) #Query for Tweet
    return render_template('output_descriptive_form.html', _id=_id)
 
 @app.route('/id', methods=['POST'])
@@ -85,10 +45,17 @@ def id():
    if reqPage[0]['pageType'] == "descriptive":
       return redirect((url_for('descriptive', _id=_id)))
 
-@app.route('/admin/login', methods=['GET'])
+@app.route('/admin/login', methods=['GET', 'POST'])
 def adminlogin():
    return render_template('admin_login_form.html')
 
-@app.route('/admin/landing', methods=['GET'])
+@app.route('/admin/landing', methods=['GET', 'POST'])
 def adminlanding():
    return render_template('admin_form.html')
+
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+   reqTweet = Tweet.objects()
+   stats = statTweets(reqTweet)
+   return str(stats)
+   
