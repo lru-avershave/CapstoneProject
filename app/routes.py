@@ -7,7 +7,7 @@ import pandas as pd
 import json
 from utils.Tweet import GetTweet
 from utils.Stats import statTweets
-
+from utils.LocationCounter import locationCounter
 
 @app.route('/',methods=["GET", "POST"])
 def index():
@@ -29,7 +29,8 @@ def stats():
 @app.route('/basic/<_id>', methods=["GET", "POST"])
 def basic(_id):
    reqTweet, reqPage = GetTweet(_id)
-   return render_template('output_basic_form.html', _id=_id, tweets=reqTweet, filters=reqPage[0])
+   locationCounter(reqTweet)
+   return render_template('output_basic_form.html', _id=_id, tweets=reqTweet, filters=reqPage[0], locals = locations)
 
 @app.route('/descriptive/<_id>',methods=["GET", "POST"])
 def descriptive(_id):
