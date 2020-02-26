@@ -7,11 +7,13 @@ import pandas as pd
 import json
 from utils.Tweet import GetTweet
 from utils.Stats import statTweets
+from utils.DynamicFilters import dynamicFiltering
 from utils.LocationCounter import locationCounter
 
 @app.route('/',methods=["GET", "POST"])
 def index():
-   return render_template('input_form.html')
+   filterOptions = dynamicFiltering()
+   return render_template('input_form.html', dynamicLocations = filterOptions[0], dynamicProfiles = filterOptions[1])
 
 @app.route('/stats', methods=['POST'])
 def stats():
