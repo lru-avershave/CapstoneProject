@@ -8,7 +8,7 @@ import json
 from utils.Tweet import GetTweet
 from utils.Stats import statTweets
 from utils.DynamicFilters import dynamicFiltering
-from utils.LocationCounter import locationCounter
+from utils.TweetCounter import locationCounter
 
 @app.route('/',methods=["GET", "POST"])
 def index():

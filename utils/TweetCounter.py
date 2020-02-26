@@ -6,7 +6,7 @@ def locationCounter(reqTweet):
     for i in locations:
         locationTotals.append({
                         "location" : i,
-                        "count" : Tweet.objects(location=i).count()
+                        "count" : reqTweet(location=i).count()
         })
     return locationTotals
 
