@@ -29,8 +29,8 @@ def stats():
 @app.route('/basic/<_id>', methods=["GET", "POST"])
 def basic(_id):
    reqTweet, reqPage = GetTweet(_id)
-   locationCounter(reqTweet)
-   return render_template('output_basic_form.html', _id=_id, tweets=reqTweet, filters=reqPage[0], locals = locations)
+   locationTotals = locationCounter(reqTweet)
+   return render_template('output_basic_form.html', _id=_id, tweets=reqTweet, filters=reqPage[0], locTotals = locationTotals)
 
 @app.route('/descriptive/<_id>',methods=["GET", "POST"])
 def descriptive(_id):

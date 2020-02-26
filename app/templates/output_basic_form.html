@@ -35,6 +35,9 @@ Tweet Basic Stats Output ~ Basic
                             <label id = "overall_data">
                                 <Ul>
                                     <li>Total: {{tweets|length}}</li>
+                                    {% for place in locTotals %}
+                                        <li>{{place.location}} : {{place.count}}</li>
+                                    {% endfor %}
                                 </Ul>
                             </label>
                         </div>
