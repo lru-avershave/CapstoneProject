@@ -20,6 +20,7 @@ Python Packages being used:
 + Pandas
 + MongoEngine
 + python-dotenv
++ Watchdog
 + This is could be added onto depending on what packages we need in the future
 
 Software being used:
