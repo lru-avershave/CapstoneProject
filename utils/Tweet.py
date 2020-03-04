@@ -41,8 +41,8 @@ def GetTweet(_id):
         }
     ]))
     if "filterTerm" in searchStrings[0]:
-        filterTerm = searchStrings["filterTerm"]
-        del searchStrings["filterTerm"]
+        filterTerm = searchStrings[0]["filterTerm"]
+        del searchStrings[0]["filterTerm"]
         reqTweet = Tweet.objects(__raw__ = searchStrings[0]).search_text(filterTerm)
     else:
         reqTweet = Tweet.objects(__raw__ = searchStrings[0])

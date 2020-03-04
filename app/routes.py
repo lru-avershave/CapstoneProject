@@ -34,7 +34,7 @@ def stats():
 def basic(_id):
    reqTweet, reqPage = GetTweet(_id)
    locationTotals = locationCounter(reqTweet)
-   return render_template('output_basic_form.html', _id=_id, filters=reqPage[0], locTotals = locationTotals, teets=reqTweet)
+   return render_template('output_basic_form.html', _id=_id, filters=reqPage[0], locTotals = locationTotals, tweets=reqTweet)
 
 @app.route('/descriptive/<_id>',methods=["GET", "POST"])
 def descriptive(_id):
@@ -59,7 +59,6 @@ def adminlanding():
    return render_template('admin_form.html')
 
 @app.route('/serverside/<_id>', methods=['GET'])
-@cache.cached(timeout=50)
 def serverside(_id):
    reqTweet, reqPage = GetTweet(_id)
    table = TableBuilder()
