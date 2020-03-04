@@ -1,12 +1,14 @@
 import mongodb_setup as dbConnection
 import TweetModel as TweetModel
-import ImportText as it
+from watchdir import watch
+from ImportText import collectTxt
 
 class main():
 
     try:
         dbConnection
-        it
+        collectTxt()
+        watch()
     except KeyboardInterrupt:
         print("Interrupted Main")
         exit(0)

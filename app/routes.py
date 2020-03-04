@@ -1,19 +1,21 @@
 from flask import  Flask, redirect, url_for, render_template, request, jsonify
-from app import app
+from app import app, cache
 from models.SavedPage import SavedPage
 from TweetsToDB.TweetModel import Tweet
 from mongoengine import *
 import pandas as pd
-import json
+import orjson
 from utils.Tweet import GetTweet
 from utils.Stats import statTweets
 from utils.DynamicFilters import dynamicFiltering
 from utils.TweetCounter import locationCounter
+from serverside.TableModel import TableBuilder
+from serverside.serverside_table import ServerSideTable
+from models.PageClass import Page
 
 @app.route('/',methods=["GET", "POST"])
 def index():
-   filterOptions = dynamicFiltering()
-   return render_template('input_form.html', dynamicLocations = filterOptions[0], dynamicProfiles = filterOptions[1])
+   return render_template('input_form.html')
 
 @app.route('/stats', methods=['POST'])
 def stats():
@@ -32,11 +34,11 @@ def stats():
 def basic(_id):
    reqTweet, reqPage = GetTweet(_id)
    locationTotals = locationCounter(reqTweet)
-   return render_template('output_basic_form.html', _id=_id, tweets=reqTweet, filters=reqPage[0], locTotals = locationTotals)
+   return render_template('output_basic_form.html', _id=_id, filters=reqPage[0], locTotals = locationTotals, tweets=reqTweet)
 
 @app.route('/descriptive/<_id>',methods=["GET", "POST"])
 def descriptive(_id):
-   reqTweet, reqPage = GetTweet(_id) #Query for Tweet
+   reqPage = GetTweet(_id)
    return render_template('output_descriptive_form.html', _id=_id)
 
 @app.route('/id', methods=['POST'])
@@ -56,9 +58,10 @@ def adminlogin():
 def adminlanding():
    return render_template('admin_form.html')
 
-@app.route('/test', methods=['GET', 'POST'])
-def test():
-   reqTweet = Tweet.objects()
-   stats = statTweets(reqTweet)
-   return str(stats)
-   
+@app.route('/serverside/<_id>', methods=['GET'])
+def serverside(_id):
+   reqTweet, reqPage = GetTweet(_id)
+   table = TableBuilder()
+   data = table.collect_data_serverside(request, orjson.loads(reqTweet.to_json())) ### THIS IS SLOW WITH A BIG QUERY
+   return jsonify(data)
+

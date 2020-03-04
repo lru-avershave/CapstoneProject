@@ -104,20 +104,6 @@ Tweet Basic Stats Output ~ Basic
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    {% for document in tweets %}
-                    <tr>
-                        <td>{{ document.tweetID }}</td>
-                        <td>{{ document.tweetCreator }}</td>
-                        <td>{{ document.tweetText|length }}</td>
-                        <td>{{ document.creatorFollowers }}</td>
-                        <td>{{ document.location }}</td>
-                        <td>{{ document.dateCreated }}</td>
-                        <td>{{ document.tweetLikes }}</td>
-                        <td>{{ document.tweetRe }}</td>
-                     </tr>
-                    {% endfor %}
-                </tbody>
                 <tfoot>
                     <tr>
                         <th>Tweet ID
@@ -158,12 +144,27 @@ Tweet Basic Stats Output ~ Basic
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.11.0/js/mdb.min.js"></script>
 <script>
     $(document).ready(function () {
-    $('#table_tweets').DataTable({
-    "scrollX": true,
-    "scrollY": 200,
+            $('#table_tweets').DataTable({
+                bProcessing: true,
+                bServerSide: true,
+                sPaginationType: "full_numbers",
+                lengthMenu: [[25, 50, 100], [25, 50, 100]],
+                bjQueryUI: true,
+                sAjaxSource: "{{ url_for('serverside', _id = _id) }}",
+                columns: [
+                    {data: 'Tweet ID'},
+                    {data: 'Profile Name'},
+                    {data: 'Word Count'},
+                    {data: 'Follower Count'},
+                    {data: 'Location'},
+                    {data: 'Time'},
+                    {data: 'Likes'},
+                    {data: 'Retweets'}
+                ]
+            });
+
     });
-    $('.dataTables_length').addClass('bs-select');
-});
+$('.dataTables_length').addClass('bs-select');
 </script>
 
 <!-- Toggles the expand state for collapse menu-->
