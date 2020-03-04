@@ -1,9 +1,10 @@
 from models.SavedPage import SavedPage
 from TweetsToDB.TweetModel import Tweet
 from mongoengine import *
+import orjson
 
 def GetTweet(_id):
-    reqPage = list(SavedPage.objects(id=_id).aggregate([
+    searchStrings = list(SavedPage.objects(id=_id).aggregate([
         {
             "$project": {
             "_id": "$$REMOVE",
@@ -39,12 +40,10 @@ def GetTweet(_id):
             }
         }
     ]))
-    searchStrings = reqPage[0].copy()
-    if "filterTerm" in searchStrings:
+    if "filterTerm" in searchStrings[0]:
         filterTerm = searchStrings["filterTerm"]
         del searchStrings["filterTerm"]
-        reqTweet = Tweet.objects(__raw__ = searchStrings).search_text(filterTerm)
+        reqTweet = Tweet.objects(__raw__ = searchStrings[0]).search_text(filterTerm)
     else:
-        reqTweet = Tweet.objects(__raw__ = searchStrings)
-
-    return reqTweet, reqPage
+        reqTweet = Tweet.objects(__raw__ = searchStrings[0])
+    return reqTweet, searchStrings

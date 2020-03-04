@@ -49,21 +49,12 @@ Tweet Basic Stats Inputs
                             <br>
                             <div class="row">
                                 Location:   
-                                <select name = "input_location" id ="location_options">
-                                    {% for type in dynamicLocations%}
-                                        <option value = ""></option>
-                                        <option value = "{{type}}">{{type}}</option>
-                                    {% endfor %}
-                                </select>
+                                <input type = "location" name = "input_location" value ="">
                             </div>
                             <br>
                             <div class="row">
                                 Profile:
-                                <select name = "input_profile" id ="profile_options">
-                                    <option value = ""></option>
-                                    {% for type in dynamicProfiles%}
-                                        <option value = "{{type}}">{{type}}</option>
-                                    {% endfor %}
+                                <input type = "profile" name = "input_profile" value ="">
                                 </select>
                             </div>
                         </div>
