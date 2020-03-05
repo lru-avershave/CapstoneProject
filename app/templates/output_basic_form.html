@@ -73,12 +73,7 @@ Tweet Basic Stats Output ~ Basic
 
             <div class ="row d-flex justify-content-center">
                 <div class = "card mb-4">
-                    <div class = "card-body">
-                        <a class="btn btn-primary" data-toggle="collapse" href="#collapse_filter" id = collapse_button role="button" aria-expanded="false" aria-controls="collapseExample">View Graph</a>
-                        <div class="collapse" id="collapse_filter">
-                            <canvas id="tweet_barchart" width =200px height=200px></canvas>
-                        </div>
-                    </div>
+                    <canvas id="tweet_barchart"></canvas>
                 </div>
             </div>
     
@@ -186,10 +181,15 @@ $('.dataTables_length').addClass('bs-select');
     var myBarChart = new Chart(ctxB, {
         type: 'bar',
         data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: [{% for places in locTotals%}
+                    "{{places.location}}",
+                    {%endfor%}            
+        ],
         datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        label: '# of Tweets',
+        data: [{% for places in locTotals%}
+                    "{{places.count}}",
+                    {%endfor%}],
         backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
