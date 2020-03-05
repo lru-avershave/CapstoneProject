@@ -20,9 +20,10 @@ Python Packages being used:
 + Pandas
 + MongoEngine
 + OrJSON
-+ python_caching
++ flask_caching
 + python-dotenv
 + Watchdog
++ Openpyxl
 + This is could be added onto depending on what packages we need in the future
 
 Software being used:
