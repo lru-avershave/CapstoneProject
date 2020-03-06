@@ -1,5 +1,6 @@
 import pandas as pd
 from openpyxl import Workbook
+from openpyxl.writer.excel import save_virtual_workbook
 import datetime
  
 def exportToFile(fileName):
@@ -7,4 +8,4 @@ def exportToFile(fileName):
     #sheet
     ws = wb.active
     ws.title = "Time"
-    wb.save(filename = fileName + ".xlsx")
+    return save_virtual_workbook(wb)

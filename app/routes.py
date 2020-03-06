@@ -1,4 +1,5 @@
-from flask import  Flask, redirect, url_for, render_template, request, jsonify
+from flask import  Flask, redirect, url_for, render_template, request, jsonify, send_file
+from flask_excel import make_response
 from app import app, cache
 from models.SavedPage import SavedPage
 from TweetsToDB.TweetModel import Tweet
@@ -66,3 +67,8 @@ def serverside(_id):
    data = table.collect_data_serverside(request, orjson.loads(reqTweet.to_json())) ### THIS IS SLOW WITH A BIG QUERY
    return jsonify(data)
 
+@app.route('/downloadfiles', methods=['GET', 'POST'])
+def generateExcel():
+   fileName = request.form.get('file_name')
+   file = exportToFile(fileName)
+   return send_file(fileName + ".xlsx", as_attachment=True)
