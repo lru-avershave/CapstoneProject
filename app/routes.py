@@ -9,7 +9,7 @@ import orjson
 from utils.Tweet import GetTweet
 from utils.Stats import statTweets
 from utils.TweetCounter import locationCounter
-from utils.FileSaver import exportToFile
+from utils.FileSaver import exportToFile, to_tde
 
 from serverside.TableModel import TableBuilder
 from serverside.serverside_table import ServerSideTable
@@ -68,7 +68,8 @@ def serverside(_id):
    return jsonify(data)
 
 @app.route('/downloadfiles', methods=['GET', 'POST'])
-def generateExcel():
+def generateFile():
    fileName = request.form.get('file_name')
-   file = exportToFile(fileName)
-   return send_file(fileName + ".xlsx", as_attachment=True)
+   #file = exportToFile(fileName)
+   sample = to_tde(fileName)
+   return send_file("test.tde", as_attachment=True)
