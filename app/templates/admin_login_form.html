@@ -5,19 +5,18 @@ Tweet Basic Stats Output ~ Admin Login Page
 {% endblock title %}
 
 {% block content %}
-<form action="#" method="POST">
+<form action="{{ url_for('adminlanding') }}" method="POST">
     <div class ="row d-flex justify-content-center">
         <div class = "card mb-4">
             <div class = "card-body text-center">
                     <h5>Login</h5>
                       <!-- Email -->
-                    <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+                    <input type="username" id="defaultLoginFormUsername" class="form-control mb-4" placeholder="Username">
 
                     <!-- Password -->
                     <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
                     <!-- Sign in button -->
                     <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
-
             </div>
         </div>
     </div>

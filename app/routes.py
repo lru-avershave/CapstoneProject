@@ -1,5 +1,4 @@
 from flask import  Flask, redirect, url_for, render_template, request, jsonify, send_file
-from flask_excel import make_response
 from app import app, cache
 from models.SavedPage import SavedPage
 from TweetsToDB.TweetModel import Tweet
@@ -17,6 +16,7 @@ from models.PageClass import Page
 
 @app.route('/',methods=["GET", "POST"])
 def index():
+   ##INClude logout stuff if needed
    return render_template('input_form.html')
 
 @app.route('/stats', methods=['POST'])
@@ -58,6 +58,7 @@ def adminlogin():
 
 @app.route('/admin/landing', methods=['GET', 'POST'])
 def adminlanding():
+   ##DO SOMETHING TO CHECK USERNAME
    return render_template('admin_form.html')
 
 @app.route('/serverside/<_id>', methods=['GET'])

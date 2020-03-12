@@ -6,6 +6,12 @@ Tweet Basic Stats Inputs
 
 {% block content %}
 <div class="container">
+    <div class ="row d-flex justify-content-end">
+        <form action="{{ url_for('adminlogin') }}" method="POST">
+            <!-- Creates the load old output row -->
+            <input type = "submit" name = "admin_login" value = "Login in as Adminstrator">
+        </form>
+    </div>
     <div class = "row d-flex justify-content-center">
         <h2 style="text-align: center;">Tweet Basic Stats</h2>
     </div>
@@ -55,7 +61,6 @@ Tweet Basic Stats Inputs
                             <div class="row">
                                 Profile:
                                 <input type = "profile" name = "input_profile" value ="">
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -73,17 +78,6 @@ Tweet Basic Stats Inputs
                         <br>
                         <br>
                         <input type = "submit" name = "load_old_output" value = "Load">
-                  </form>
-                </div>
-            </div>
-        </div>
-
-        <div class ="row d-flex justify-content-end">
-            <div class = "card mb-4">
-                <div class = "card-body text-center">
-                    <form action="{{ url_for('adminlogin') }}" method="POST">
-                        <!-- Creates the load old output row -->
-                        <input type = "submit" name = "admin_login" value = "Login in as Adminstrator">
                   </form>
                 </div>
             </div>
