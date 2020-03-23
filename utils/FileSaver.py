@@ -14,5 +14,5 @@ def exportToFile(fileName):
     #DO SOME DATA STUFF
     wb.save(name)
     if not os.path.isfile('FileName.xlsx'):
-        wb.save(os.path.join('app', name))
+        wb.save(os.path.join('app//temporaryFiles', name))
     return wb
