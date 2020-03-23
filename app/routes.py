@@ -8,7 +8,7 @@ import orjson
 from utils.Tweet import GetTweet
 from utils.Stats import statTweets
 from utils.TweetCounter import locationCounter
-from utils.FileSaver import exportToFile, to_tde
+from utils.FileSaver import exportToFile
 
 from serverside.TableModel import TableBuilder
 from serverside.serverside_table import ServerSideTable
@@ -71,6 +71,7 @@ def serverside(_id):
 @app.route('/downloadfiles', methods=['GET', 'POST'])
 def generateFile():
    fileName = request.form.get('file_name')
-   #file = exportToFile(fileName)
-   sample = to_tde(fileName)
-   return send_file("test.tde", as_attachment=True)
+   file = exportToFile(fileName)
+
+   
+   return send_file("test.xlsx", as_attachment=True)

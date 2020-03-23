@@ -37,14 +37,16 @@ Tweet Basic Stats Output ~ Descriptive
            </div>
         </div>
     </div>
-
+    
     <div class ="row d-flex justify-content-center">
         <div class = "card mb-4">
             <div class = "card-body text-center">
-                    <h5>Save to File</h5>
-                    <label>File Name: </label>
+                <h5>Save to File</h5>
+                <label>File Name: </label>
+                <form action="{{ url_for('generateFile') }}" method="POST">
                     <input type = "text" name = "file_name" value = ""><br>
-                    <input type = button name = "Save" value = "Save to File">
+                    <input type = "submit" name = "Save" value = "Save to File">
+                </form>
             </div>
         </div>
     </div>
