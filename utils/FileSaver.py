@@ -1,5 +1,7 @@
 import pandas as pd
 from openpyxl import Workbook
+import os.path
+
 
 def exportToFile(fileName):
 
@@ -11,4 +13,6 @@ def exportToFile(fileName):
 
     #DO SOME DATA STUFF
     wb.save(name)
+    if not os.path.isfile('FileName.xlsx'):
+        wb.save(os.path.join('app', name))
     return wb

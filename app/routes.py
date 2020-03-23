@@ -72,6 +72,5 @@ def serverside(_id):
 def generateFile():
    fileName = request.form.get('file_name')
    file = exportToFile(fileName)
-
    
-   return send_file("test.xlsx", as_attachment=True)
+   return send_file(fileName + ".xlsx", as_attachment=True)
