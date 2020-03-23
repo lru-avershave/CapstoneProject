@@ -1,4 +1,4 @@
-from flask import  Flask, redirect, url_for, render_template, request, jsonify, send_file
+from flask import  Flask, redirect, url_for, render_template, request, jsonify, send_from_directory
 from app import app, cache
 from models.SavedPage import SavedPage
 from TweetsToDB.TweetModel import Tweet
@@ -72,5 +72,5 @@ def serverside(_id):
 def generateFile():
    fileName = request.form.get('file_name')
    file = exportToFile(fileName)
+   return send_from_directory("temporaryFiles",fileName + ".xlsx", as_attachment=True)
    
-   return send_file(fileName + ".xlsx", as_attachment=True)
