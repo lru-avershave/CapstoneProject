@@ -11,17 +11,29 @@ Tweet Basic Stats Output ~ Admin Login Page
             <div class = "card-body text-center">
                     <h5>Login</h5>
                       <!-- Email -->
-                    <input type="username" id="defaultLoginFormUsername" class="form-control mb-4" placeholder="Username">
+                    <input type="username" name="defaultLoginFormUsername" class="form-control mb-4" placeholder="Username">
 
                     <!-- Password -->
-                    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+                    <input type="password" name="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
                     <!-- Sign in button -->
                     <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
             </div>
         </div>
     </div>
 </form>
-
+<div class = "row d-flex justify-content-center">
+    <h3>
+        {% with messages = get_flashed_messages() %}
+           {% if messages %}
+            <strong>
+                 {% for message in messages %}
+                    {{ message }}
+                 {% endfor %}
+            </strong>
+           {% endif %}
+        {% endwith %}
+    </h3>
+</div>
 {% endblock content %}
 
 {% block scripts %}

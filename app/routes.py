@@ -9,7 +9,7 @@ from utils.Tweet import GetTweet
 from utils.Stats import statTweets
 from utils.TweetCounter import locationCounter
 from utils.FileSaver import exportToFile
-
+from utils.Login import validate
 from serverside.TableModel import TableBuilder
 from serverside.serverside_table import ServerSideTable
 from models.PageClass import Page
@@ -64,7 +64,11 @@ def adminlogin():
 
 @app.route('/admin/landing', methods=['GET', 'POST'])
 def adminlanding():
-   ##DO SOMETHING TO CHECK USERNAME
+   username = request.form.get('defaultLoginFormUsername')
+   password = request.form.get('defaultLoginFormPassword')
+   if not validate(username, password):
+      flash("Invalid Credentials")
+      return redirect((url_for('adminlogin')))
    return render_template('admin_form.html')
 
 @app.route('/serverside/<_id>', methods=['GET'])
