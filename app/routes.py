@@ -1,4 +1,4 @@
-from flask import  Flask, redirect, url_for, render_template, request, jsonify, send_file
+from flask import  Flask, redirect, url_for, render_template, request, jsonify, send_file, flash
 from app import app, cache
 from models.SavedPage import SavedPage
 from TweetsToDB.TweetModel import Tweet
@@ -36,11 +36,17 @@ def stats():
 def basic(_id):
    reqTweet, reqPage = GetTweet(_id)
    locationTotals = locationCounter(reqTweet)
+   if reqTweet.count() == 0:
+      flash('No results found!')
+      return redirect((url_for("index")))
    return render_template('output_basic_form.html', _id=_id, filters=reqPage[0], locTotals = locationTotals, tweets=reqTweet)
 
 @app.route('/descriptive/<_id>',methods=["GET", "POST"])
 def descriptive(_id):
-   reqPage = GetTweet(_id)
+   reqTweet, reqPage = GetTweet(_id)
+   if reqTweet.count() == 0:
+      flash('No results found!')
+      return redirect((url_for("index")))
    return render_template('output_descriptive_form.html', _id=_id)
 
 @app.route('/id', methods=['POST'])
