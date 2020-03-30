@@ -1,4 +1,4 @@
-from flask import  Flask, redirect, url_for, render_template, request, jsonify, send_file, flash
+from flask import  Flask, redirect, url_for, render_template, request, jsonify, send_file, flash,session
 from app import app, cache
 from models.SavedPage import SavedPage
 from TweetsToDB.TweetModel import Tweet
@@ -58,18 +58,22 @@ def id():
    if reqPage[0]['pageType'] == "descriptive":
       return redirect((url_for('descriptive', _id=_id)))
 
+@app.route('/admin/', methods=['GET', 'POST'])
+def admin():
+   if not session.get('logged_in'):
+      return render_template('admin_login_form.html')
+   else:
+      return render_template('admin_form.html')
+
 @app.route('/admin/login', methods=['GET', 'POST'])
 def adminlogin():
-   return render_template('admin_login_form.html')
-
-@app.route('/admin/landing', methods=['GET', 'POST'])
-def adminlanding():
    username = request.form.get('defaultLoginFormUsername')
    password = request.form.get('defaultLoginFormPassword')
    if not validate(username, password):
       flash("Invalid Credentials")
-      return redirect((url_for('adminlogin')))
-   return render_template('admin_form.html')
+      return redirect((url_for('admin')))
+   session['logged_in'] = True
+   return redirect((url_for('admin')))
 
 @app.route('/serverside/<_id>', methods=['GET'])
 def serverside(_id):
@@ -86,3 +90,7 @@ def generateFile():
                  attachment_filename=fileName + '.xlsx',
                  as_attachment=True)
    
+@app.route('/admin/logout', methods=['GET', 'POST'])
+def logout():
+   session['logged_in'] = False
+   return redirect(url_for('index'))
