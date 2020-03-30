@@ -7,7 +7,7 @@ Tweet Basic Stats Inputs
 {% block content %}
 <div class="container">
     <div class ="row d-flex justify-content-end">
-        <form action="{{ url_for('adminlogin') }}" method="POST">
+        <form action="{{ url_for('admin') }}" method="POST">
             <!-- Creates the load old output row -->
             <input type = "submit" name = "admin_login" value = "Login in as Adminstrator">
         </form>
@@ -33,8 +33,13 @@ Tweet Basic Stats Inputs
             <div class = "card mb-4">
             <!--Creates the first column for choosing type of statistics-->
                 <div class = "card-body text-center">
-                    <div class = "col-lg-12">    
-                        <h3> Choose what type of statistics to run:</h3 > 
+    
+                    <div class = "col-lg-12">
+                        <div class="help-tip">
+                            <p>Choose a type of statistic to query the database for.  Apply flters before running with the other window.  Basic gives you attribute information while descriptive gives you computational data.</p>
+                        </div>
+                        <br>
+                        <h3> Choose Type of Statistics to Run:</h3> 
                         <input type = "radio" name = "statistics" id = "basic" checked=true value = "basic"> Basic<br>
                         <input type = "radio" name = "statistics" id = "descriptive" value = "descriptive"> Descriptive<br>
                         <input type = "submit" name = "run_stats" value = "Run">
@@ -46,33 +51,42 @@ Tweet Basic Stats Inputs
                 </div>  
             <div class = "card mb-4">
                 <div class = "card-body">          
-                <!--Creates the second column for filtering-->
-                    <div class = "col-lg-6">
+                    <div class = "col-lg-12">
+                              <!--Creates the second column for filtering-->
+                <div class="help-tip">
+                    <p>Choose filters to limit your results to tweets with data matching the specified fields.</p>
+                </div>
+                <br>
                         <h3>Filters</h3>
                         <a class="btn btn-primary" data-toggle="collapse" href="#collapse_filter" id = collapse_button role="button" aria-expanded="false" aria-controls="collapseExample">Expand</a>
                         <div class="collapse" id="collapse_filter">
                             <div class="row">
-                                Term:       
+                                Term:
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                 <input type = "text" name = "input_term" value ="">
                             </div>
                             <br>
                             <div class="row">
                                 Time:       
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                 <input type = "time" name = "input_time" value ="">
                             </div>
                             <br>
                             <div class="row">
                                 Date:       
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                 <input type = "date" name = "input_date" value ="">
                             </div>
                             <br>
                             <div class="row">
                                 Location:   
+                                &nbsp
                                 <input type = "location" name = "input_location" value ="">
                             </div>
                             <br>
                             <div class="row">
                                 Profile:
+                                &nbsp&nbsp&nbsp&nbsp&nbsp
                                 <input type = "profile" name = "input_profile" value ="">
                             </div>
                         </div>
@@ -86,7 +100,12 @@ Tweet Basic Stats Inputs
                 <div class = "card-body text-center">
                     <form action="{{ url_for('id') }}" method="POST">
                         <!-- Creates the load old output row -->
+                        <div class="help-tip">
+                            <p>Use a generated ID to reload a previous set of results.</p>
+                        </div>
+                        <br>
                         <h3> Load a Previous Output:</h3>
+                        <body>ID: </body>
                         <input type = "text" name = "old_output" value = "">
                         <br>
                         <br>
@@ -135,4 +154,88 @@ Tweet Basic Stats Inputs
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.11.0/css/mdb.min.css" rel="stylesheet">
+<style>
+    .help-tip{
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        text-align: center;
+        background-color: #BCDBEA;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+        line-height: 26px;
+        cursor: default;
+    }
+
+    .help-tip:before{
+        content:'?';
+        font-weight: bold;
+        color:#fff;
+    }
+
+    .help-tip:hover p{
+        display:block;
+        transform-origin: 100% 0%;
+
+        -webkit-animation: fadeIn 0.3s ease-in-out;
+        animation: fadeIn 0.3s ease-in-out;
+
+    }
+
+    .help-tip p{    /* The tooltip */
+        display: none;
+        text-align: left;
+        background-color: #1E2021;
+        padding: 20px;
+        width: 300px;
+        position: absolute;
+        border-radius: 3px;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        right: -4px;
+        color: #FFF;
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    .help-tip p:before{ /* The pointer of the tooltip */
+        position: absolute;
+        content: '';
+        width:0;
+        height: 0;
+        border:6px solid transparent;
+        border-bottom-color:#1E2021;
+        right:10px;
+        top:-12px;
+    }
+
+    .help-tip p:after{ /* Prevents the tooltip from being hidden */
+        width:100%;
+        height:40px;
+        content:'';
+        position: absolute;
+        top:-40px;
+        left:0;
+    }
+
+    /* CSS animation */
+
+    @-webkit-keyframes fadeIn {
+        0% { 
+            opacity:0; 
+            transform: scale(0.6);
+        }
+
+        100% {
+            opacity:100%;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes fadeIn {
+        0% { opacity:0; }
+        100% { opacity:100%; }
+    }
+</style>
 {% endblock styles %}

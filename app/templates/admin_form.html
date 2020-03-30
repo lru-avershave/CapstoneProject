@@ -1,30 +1,36 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-Tweet Basic Stats Output ~ Admin Login Page
+Tweet Basic Stats ~ Admin Page
 {% endblock title %}
 
 {% block content %}
-<form action="{{ url_for('index') }}" method="POST">
-    <div class ="row d-flex justify-content-end">
-        <input type = submit name = "logout" value = "Logout">
-    </div>
-</form>
-<div class ="row d-flex justify-content-center">
-    <h1>Admin Tools</h1>
-</div>
     <div class = "container">
+        <form action="{{ url_for('logout') }}" method="POST">
+            <div class ="row d-flex justify-content-end">
+                <input type = submit name = "logout" value = "Logout">
+            </div>
+        </form>
+        <div class ="row d-flex justify-content-center">
+            <h1>Admin Tools</h1>
+        </div>
         <div class = "card-deck">
             <div class = "card mb-4">
                 <div class = "card-body text-center">
+                    <div class="help-tip">
+                        <p>Clear out previous output stored pages that were created before the date below.</p>
+                    </div> 
+                    <br>
                     <h3>Clear Filtered Pages Older than:</h3>
                     <div class="row">
-                        Date:       
+                        Date:
+                        &nbsp&nbsp       
                         <input type = "date" name = "input_date" value ="">
                     </div>
                     <br>
                     <div class="row">
-                        Time:       
+                        Time:     
+                        &nbsp&nbsp  
                         <input type = "time" name = "input_time" value ="">
                     </div>
                     <br>
@@ -35,31 +41,40 @@ Tweet Basic Stats Output ~ Admin Login Page
             <div class = "card mb-4">
                 <div class = "card-body text-center">          
                 <!--Creates the second column for filtering-->
+                    <div class="help-tip">
+                        <p>Query for tweets based on the limits below to populate the table below with results.</p>
+                    </div>  
+                    <br>  
                     <h3>Clear Tweets</h3>
                     <br>
                     <h5>Search Options</h5>
                     <div class="row">
-                        Term:       
+                        Term:
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         <input type = "text" name = "input_term" value ="">
                     </div>
                     <br>
                     <div class="row">
                         Time:       
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         <input type = "time" name = "input_time" value ="">
                     </div>
                     <br>
                     <div class="row">
                         Date:       
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         <input type = "date" name = "input_date" value ="">
                     </div>
                     <br>
                     <div class="row">
                         Location:   
+                        &nbsp
                         <input type = "location" name = "input_location" value ="">
                     </div>
                     <br>
                     <div class="row">
                         Profile:
+                        &nbsp&nbsp&nbsp&nbsp&nbsp
                         <input type = "profile" name = "input_profile" value ="">
                     </div>
                     <br>
@@ -112,6 +127,11 @@ Tweet Basic Stats Output ~ Admin Login Page
         <div class ="row d-flex justify-content-center">
             <div class = "card mb-4">
                 <div class = "card-body text-center">
+                    <div class="help-tip">
+                        <p>Remove all selected tweets from the database.</p>
+                    </div> 
+                    <br>
+                    <br>
                     <input type = "submit" name = "delete_tweets" value = "Delete Selected from Database">
                 </div>
             </div>
@@ -137,4 +157,90 @@ Tweet Basic Stats Output ~ Admin Login Page
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.11.0/css/mdb.min.css" rel="stylesheet">
+
+<style>
+    .help-tip{
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        text-align: center;
+        background-color: #BCDBEA;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+        line-height: 26px;
+        cursor: default;
+    }
+
+    .help-tip:before{
+        content:'?';
+        font-weight: bold;
+        color:#fff;
+    }
+
+    .help-tip:hover p{
+        display:block;
+        transform-origin: 100% 0%;
+
+        -webkit-animation: fadeIn 0.3s ease-in-out;
+        animation: fadeIn 0.3s ease-in-out;
+
+    }
+
+    .help-tip p{    /* The tooltip */
+        display: none;
+        text-align: left;
+        background-color: #1E2021;
+        padding: 20px;
+        width: 300px;
+        position: absolute;
+        border-radius: 3px;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        right: -4px;
+        color: #FFF;
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    .help-tip p:before{ /* The pointer of the tooltip */
+        position: absolute;
+        content: '';
+        width:0;
+        height: 0;
+        border:6px solid transparent;
+        border-bottom-color:#1E2021;
+        right:10px;
+        top:-12px;
+    }
+
+    .help-tip p:after{ /* Prevents the tooltip from being hidden */
+        width:100%;
+        height:40px;
+        content:'';
+        position: absolute;
+        top:-40px;
+        left:0;
+    }
+
+    /* CSS animation */
+
+    @-webkit-keyframes fadeIn {
+        0% { 
+            opacity:0; 
+            transform: scale(0.6);
+        }
+
+        100% {
+            opacity:100%;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes fadeIn {
+        0% { opacity:0; }
+        100% { opacity:100%; }
+    }
+</style>
+
 {% endblock styles %}

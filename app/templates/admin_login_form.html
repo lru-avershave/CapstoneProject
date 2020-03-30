@@ -1,11 +1,11 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-Tweet Basic Stats Output ~ Admin Login Page
+Tweet Basic Stats ~ Admin Login Page
 {% endblock title %}
 
 {% block content %}
-<form action="{{ url_for('adminlanding') }}" method="POST">
+<form action="{{ url_for('adminlogin') }}" method="POST">
     <div class ="row d-flex justify-content-center">
         <div class = "card mb-4">
             <div class = "card-body text-center">
@@ -19,6 +19,11 @@ Tweet Basic Stats Output ~ Admin Login Page
                     <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
             </div>
         </div>
+    </div>
+</form>
+<form action="{{ url_for('index') }}" method="POST">
+    <div class ="row d-flex justify-content-center">
+        <input type = submit name = "home" value = "Home">
     </div>
 </form>
 <div class = "row d-flex justify-content-center">
