@@ -11,19 +11,14 @@ Tweet Basic Stats ~ Admin Login Page
             <div class = "card-body text-center">
                     <h5>Login</h5>
                       <!-- Email -->
-                    <input type="username" name="defaultLoginFormUsername" class="form-control mb-4" placeholder="Username">
+                    <input type="username" name="loginFormUsername" class="form-control mb-4" placeholder="Username">
 
                     <!-- Password -->
-                    <input type="password" name="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+                    <input type="password" name="loginFormPassword" class="form-control mb-4" placeholder="Password">
                     <!-- Sign in button -->
                     <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
             </div>
         </div>
-    </div>
-</form>
-<form action="{{ url_for('index') }}" method="POST">
-    <div class ="row d-flex justify-content-center">
-        <input type = submit name = "home" value = "Home">
     </div>
 </form>
 <div class = "row d-flex justify-content-center">
@@ -39,6 +34,12 @@ Tweet Basic Stats ~ Admin Login Page
         {% endwith %}
     </h3>
 </div>
+
+<form action="{{ url_for('index') }}" method="POST">
+    <div class ="row d-flex justify-content-center">
+        <input type = submit name = "home" value = "Home">
+    </div>
+</form>
 {% endblock content %}
 
 {% block scripts %}
