@@ -6,15 +6,20 @@ Tweet Basic Stats Inputs
 
 {% block content %}
 <div class="container">
+
+    <!-- Admin Login button -->
     <div class ="row d-flex justify-content-end">
         <form action="{{ url_for('admin') }}" method="POST">
-            <!-- Creates the load old output row -->
             <input type = "submit" name = "admin_login" value = "Login in as Adminstrator">
         </form>
     </div>
+
+    <!-- Heading-->
     <div class = "row d-flex justify-content-center">
         <h2 style="text-align: center;">Tweet Basic Stats</h2>
     </div>
+
+    <!-- Message for when 0 tweets are returned-->
     <div class = "row d-flex justify-content-center">
         <h2>
             {% with messages = get_flashed_messages() %}
@@ -28,12 +33,14 @@ Tweet Basic Stats Inputs
             {% endwith %}
         </h2>
     </div>
+
+
     <form action="{{ url_for('stats') }}" method="POST">
         <div class = "card-deck">
+
+            <!-- Card to choose type of statistic and run it-->
             <div class = "card mb-4">
-            <!--Creates the first column for choosing type of statistics-->
                 <div class = "card-body text-center">
-    
                     <div class = "col-lg-12">
                         <div class="help-tip">
                             <p>Choose a type of statistic to query the database for.  Apply flters before running with the other window.  Basic gives you attribute information while descriptive gives you computational data.</p>
@@ -47,16 +54,17 @@ Tweet Basic Stats Inputs
                         <br>
                         <br>
                     </div>
-                    </div>
-                </div>  
+                </div>
+            </div>
+            
+            <!-- Filtering options card -->
             <div class = "card mb-4">
                 <div class = "card-body">          
                     <div class = "col-lg-12">
-                              <!--Creates the second column for filtering-->
-                <div class="help-tip">
-                    <p>Choose filters to limit your results to tweets with data matching the specified fields.</p>
-                </div>
-                <br>
+                        <div class="help-tip">
+                            <p>Choose filters to limit your results to tweets with data matching the specified fields.</p>
+                        </div>
+                        <br>
                         <h3>Filters</h3>
                         <a class="btn btn-primary" data-toggle="collapse" href="#collapse_filter" id = collapse_button role="button" aria-expanded="false" aria-controls="collapseExample">Expand</a>
                         <div class="collapse" id="collapse_filter">
@@ -93,33 +101,37 @@ Tweet Basic Stats Inputs
                     </div>
                 </div>
             </div>
+
         </div>
     </form>
-        <div class ="row d-flex justify-content-center">
-            <div class = "card mb-4">
-                <div class = "card-body text-center">
-                    <form action="{{ url_for('id') }}" method="POST">
-                        <!-- Creates the load old output row -->
-                        <div class="help-tip">
-                            <p>Use a generated ID to reload a previous set of results.</p>
-                        </div>
-                        <br>
-                        <h3> Load a Previous Output:</h3>
-                        <body>ID: </body>
-                        <input type = "text" name = "old_output" value = "">
-                        <br>
-                        <br>
-                        <input type = "submit" name = "load_old_output" value = "Load">
-                  </form>
-                </div>
+
+    <!-- Load a previous output card with button and inputs -->
+    <div class ="row d-flex justify-content-center">
+        <div class = "card mb-4">
+            <div class = "card-body text-center">
+                <form action="{{ url_for('id') }}" method="POST">
+                    <!-- Creates the load old output row -->
+                    <div class="help-tip">
+                        <p>Use a generated ID to reload a previous set of results.</p>
+                    </div>
+                    <br>
+                    <h3> Load a Previous Output:</h3>
+                    <body>ID: </body>
+                    <input type = "text" name = "old_output" value = "">
+                    <br>
+                    <br>
+                    <input type = "submit" name = "load_old_output" value = "Load">
+                </form>
             </div>
         </div>
-</div>
+    </div>
 
+</div>
 
 {% endblock content %}
 
 {% block scripts %}
+
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Bootstrap tooltips -->
@@ -143,9 +155,11 @@ Tweet Basic Stats Inputs
     $('#collapse_button').text("Collapse")
     })
 </script>
+
 {% endblock scripts %}
 
 {% block styles %}
+
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Google Fonts -->
@@ -154,6 +168,8 @@ Tweet Basic Stats Inputs
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.11.0/css/mdb.min.css" rel="stylesheet">
+
+<!-- Help button -->
 <style>
     .help-tip{
         position: absolute;
@@ -238,4 +254,5 @@ Tweet Basic Stats Inputs
         100% { opacity:100%; }
     }
 </style>
+
 {% endblock styles %}

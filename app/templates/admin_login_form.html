@@ -5,14 +5,15 @@ Tweet Basic Stats ~ Admin Login Page
 {% endblock title %}
 
 {% block content %}
+
+<!-- User input window for login information as well as login button-->
 <form action="{{ url_for('adminlogin') }}" method="POST">
     <div class ="row d-flex justify-content-center">
         <div class = "card mb-4">
             <div class = "card-body text-center">
                     <h5>Login</h5>
-                      <!-- Email -->
+                    <!-- Username -->
                     <input type="username" name="loginFormUsername" class="form-control mb-4" placeholder="Username">
-
                     <!-- Password -->
                     <input type="password" name="loginFormPassword" class="form-control mb-4" placeholder="Password">
                     <!-- Sign in button -->
@@ -21,6 +22,8 @@ Tweet Basic Stats ~ Admin Login Page
         </div>
     </div>
 </form>
+
+<!-- Message to show invalid credential situations -->
 <div class = "row d-flex justify-content-center">
     <h3>
         {% with messages = get_flashed_messages() %}
@@ -35,23 +38,28 @@ Tweet Basic Stats ~ Admin Login Page
     </h3>
 </div>
 
+<!-- Button to return to the home screen -->
 <form action="{{ url_for('index') }}" method="POST">
     <div class ="row d-flex justify-content-center">
         <input type = submit name = "home" value = "Home">
     </div>
 </form>
+
 {% endblock content %}
 
 {% block scripts %}
+
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.11.0/js/mdb.min.js"></script>
+
 {% endblock scripts %}
 
 {% block styles %}
+
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Google Fonts -->
@@ -60,4 +68,5 @@ Tweet Basic Stats ~ Admin Login Page
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.11.0/css/mdb.min.css" rel="stylesheet">
+
 {% endblock styles %}
