@@ -1,7 +1,6 @@
 from models.SavedPage import SavedPage
 from TweetsToDB.TweetModel import Tweet
 from mongoengine import *
-import orjson
 
 def GetTweet(_id):
     searchStrings = list(SavedPage.objects(id=_id).aggregate([

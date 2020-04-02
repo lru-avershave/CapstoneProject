@@ -1,14 +1,11 @@
 import pandas as pd
 from pandas.io.json import json_normalize
-from mongoengine import *
 from TweetsToDB.TweetModel import Tweet
 import json
 
 #Need to create a dataframe in order to compute stats
-def statTweets(reqTweet):
+def statTweets(jsonTweet):
     options = ['tweetLikes', 'tweetRe']
-    Tweets = reqTweet.to_json()
-    jsonTweet = json.loads(Tweets)
     normalTweet = json_normalize(jsonTweet)
     df = pd.DataFrame(normalTweet)
     mean, median, mode, deviation, variance, quartile1, quartile3, ranges, outliers = [], [], [], [], [], [], [], [], []

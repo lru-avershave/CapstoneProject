@@ -21,7 +21,7 @@ def TextToTweet(filename):
                             tweetText=i['text'],
                             creatorFollowers=i['user']['followers_count'],
                             mentions=i['entities']['user_mentions'],
-                            dateCreated=pd.to_datetime(i['created_at']),
+                            dateCreated=i['created_at'],
                             tweetID=i['id'],
                             tweetLikes=i['favorite_count'],
                             tweetRe=i['retweet_count'],
@@ -35,6 +35,6 @@ def TextToTweet(filename):
         pass
 
 def collectTxt():
-    os.chdir('C:\\Users\\austi\\Desktop\\Text\\')
+    os.chdir("C:\\Users\\austi\\OneDrive\\Spring(COVID)\\Text")
     for file in glob.glob('*.txt'):
         TextToTweet(file)

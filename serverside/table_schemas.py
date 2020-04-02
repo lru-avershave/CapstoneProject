@@ -35,7 +35,7 @@ SERVERSIDE_TABLE_COLUMNS = [
         "searchable": True
     },
     {
-        "data_name": "dateCreated.$date",
+        "data_name": "dateCreated",
         "column_name": "Time",
         "default": 0,
         "order": 6,

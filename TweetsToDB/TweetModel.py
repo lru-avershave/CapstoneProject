@@ -11,20 +11,7 @@ class Tweet(Document):
     creatorFollowers = IntField()
     mentions = ListField()
     location = StringField()
-    dateCreated = DateTimeField()
-
-    def json(self):
-        tweet_dict = {
-            "tweetID": self.tweetID,
-            "tweetCreator": self.tweetCreator,
-            "tweetText": len(self.tweetText),
-            "tweetLikes": self.tweetLikes,
-            "tweetRe": self.tweetRe,
-            "creatorFollowers": self.creatorFollowers,
-            "location": self.location,
-            "dateCreated": self.dateCreated
-        }
-        return json.dumps(tweet_dict)
+    dateCreated = StringField()
 
     meta = {'indexes': [
         {'fields': ['$tweetText'],

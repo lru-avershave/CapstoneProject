@@ -1,5 +1,6 @@
 import re
-
+from pandas import to_datetime
+from datetime import datetime
 
 class ServerSideTable(object):
     '''
@@ -61,7 +62,18 @@ class ServerSideTable(object):
                 default = column['default']
                 data_name = column['data_name']
                 column_name = column['column_name']
-                row[column_name] = x.get(data_name, default)
+                if(data_name == "tweetID"):
+                    tweetID = x.get(data_name, default)
+                    row[column_name] = "<a href='https://www.twitter.com/user/status/"+ str(tweetID) + "' target='_blank'>"+ str(tweetID) +"</a>"
+                elif(data_name == "tweetCreator"):
+                    tweetCreator = x.get(data_name, default)
+                    row[column_name] = "<a href='https://www.twitter.com/"+ str(tweetCreator) + "' target='_blank'>"+ str(tweetCreator) +"</a>"
+                elif(data_name == "dateCreated"):
+                    date = x.get(data_name, default)
+                    convertedDate = datetime.strptime(date, "%a %b %d %H:%S:%f %z %Y")
+                    row[column_name] = convertedDate
+                else:
+                    row[column_name] = x.get(data_name, default)
             rows.append(row)
         return rows
 

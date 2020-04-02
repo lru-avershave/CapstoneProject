@@ -9,10 +9,9 @@ from utils.FileSaver import exportToFile
 from utils.Login import validate
 from serverside.TableModel import TableBuilder
 from serverside.serverside_table import ServerSideTable
-from models.PageClass import Page
 from models.SavedPage import SavedPage
 import pandas as pd
-import orjson
+import ujson
 
 #Home page route for start up
 @app.route('/',methods=["GET", "POST"])
@@ -77,9 +76,9 @@ def id():
 @app.route('/serverside/<_id>', methods=['GET'])
 def serverside(_id):
    reqTweet, reqPage = GetTweet(_id)
+   jsonTweet = toTweetJson(reqTweet, _id)
    table = TableBuilder()
-   data = table.collect_data_serverside(request, orjson.loads(reqTweet.to_json())) ### THIS IS SLOW WITH A BIG QUERY
-  
+   data = table.collect_data_serverside(request, jsonTweet)
    return jsonify(data)
 
 #Renders template based on validation results
@@ -124,3 +123,9 @@ def logout():
    session['logged_in'] = False
   
    return redirect(url_for('index'))
+
+@cache.memoize(300)
+def toTweetJson(reqTweet, _id):
+   jsonTweet = ujson.loads(reqTweet.to_json())
+   return jsonTweet
+
