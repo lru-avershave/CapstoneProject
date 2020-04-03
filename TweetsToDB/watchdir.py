@@ -4,10 +4,18 @@ from watchdog.events import PatternMatchingEventHandler
 from ImportText import TextToTweet
 
 def on_created(event):
+    '''
+    If a .txt file is created, this event will fire off and add the new Tweets into the database.
+    '''
     print(f"{event.src_path} has been created!")
     TextToTweet(event.src_path)
 
 def watch():
+    '''
+    This watches the folder for any changes. In this case, it watches for any creation of .txt files.
+    Once a file is created, it will go through and add the new tweets into the database.
+    The Tweet model catches any identical Tweet using the Tweet ID.
+    '''
     patterns = "*"
     ignore_patterns = ""
     ignore_directories = False

@@ -3,6 +3,10 @@ from TweetsToDB.TweetModel import Tweet
 from mongoengine import *
 
 def GetTweet(_id):
+    '''
+    This retreives the Tweets from the database. We use an aggregate function in order to produce a 'clean' search string.
+    This returns both the list of Tweets and the filters used to find the Tweet from our database.
+    '''
     searchStrings = list(SavedPage.objects(id=_id).aggregate([
         {
             "$project": {

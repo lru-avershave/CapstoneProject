@@ -1,6 +1,5 @@
 from flask import  Flask, redirect, url_for, render_template, request, jsonify, send_file, flash,session
 from app import app, cache
-from mongoengine import *
 from TweetsToDB.TweetModel import Tweet
 from utils.Tweet import GetTweet
 from utils.Stats import statTweets
