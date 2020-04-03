@@ -39,7 +39,7 @@ SERVERSIDE_TABLE_COLUMNS = [
         "column_name": "Time",
         "default": 0,
         "order": 6,
-        "searchable": False
+        "searchable": True
     },
     {
         "data_name": "tweetLikes",

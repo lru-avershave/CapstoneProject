@@ -46,6 +46,11 @@ def basic(_id):
    if reqTweet.count() == 0:
       flash('No results found!')
       return redirect((url_for("index")))
+
+   #This is hard coded and needs to be changed
+   if reqTweet.count() > 290000:
+      flash('WARNING: This queried the entire database! Please limit your options...')
+      return redirect((url_for("index")))
    
    return render_template('output_basic_form.html', _id=_id, filters=reqPage[0], locTotals = locationTotals, tweets=reqTweet)
 
@@ -58,9 +63,17 @@ def descriptive(_id):
    if reqTweet.count() == 0:
       flash('No results found!')
       return redirect((url_for("index")))
+   
+   #This is hard coded and needs to be changed
+   if reqTweet.count() > 290000:
+      flash('WARNING: This queired the entire database! Please limit your options...')
+      return redirect((url_for("index"))) 
 
    return render_template('output_descriptive_form.html', _id=_id)
 
+'''
+API that uses the ID in the url and redirects the user to the correct saved page.
+'''
 @app.route('/id', methods=['POST'])
 def id():
    _id = request.form.get('old_output')
@@ -72,7 +85,10 @@ def id():
    if reqPage[0]['pageType'] == "descriptive":
       return redirect((url_for('descriptive', _id=_id)))
 
-
+'''
+The index page uses a DataTable that does an ajax call in order to put data into the table.
+This is needed to paginate the data. This also helps with sorting/searching the data on the data table.
+'''
 @app.route('/serverside/<_id>', methods=['GET'])
 def serverside(_id):
    reqTweet, reqPage = GetTweet(_id)
@@ -124,7 +140,12 @@ def logout():
   
    return redirect(url_for('index'))
 
-@cache.memoize(300)
+'''
+This method is used strictly to cache the json data.
+The DataTable does an ajax call every time you click to see the next page on the table.
+This helps performance for the server side processing.
+'''
+@cache.memoize(30)
 def toTweetJson(reqTweet, _id):
    jsonTweet = ujson.loads(reqTweet.to_json())
    return jsonTweet
