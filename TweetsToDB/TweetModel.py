@@ -1,8 +1,8 @@
-from mongoengine import *
+from mongoengine import Document, IntField, StringField, ListField
 import json
 
 class Tweet(Document):
-    tweetID = IntField()
+    tweetID = IntField(unique=True)
     tweetCreator = StringField()
     tweetText = StringField()
     tweetTextCount = IntField()
@@ -15,7 +15,7 @@ class Tweet(Document):
 
     meta = {'indexes': [
         {'fields': ['$tweetText'],
-            'default_language': 'english',
+            'default_language': 'none',
             'weights': {'tweetText': 10}
         }
     ]}

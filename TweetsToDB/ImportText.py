@@ -5,6 +5,7 @@ import os
 from TweetModel import Tweet
 import logging
 import pathlib
+from mongoengine import NotUniqueError
 
 def TextToTweet(filename):
     logging.basicConfig(filename="TextToTweet.log", level=logging.DEBUG, format='%(levelname)s:%(message)s')
@@ -17,21 +18,25 @@ def TextToTweet(filename):
             query = query.replace('+', ' ')
 
         for i in data['statuses']:
-            newTweet = Tweet(tweetCreator=i['user']['screen_name'],
-                            tweetText=i['text'],
-                            creatorFollowers=i['user']['followers_count'],
-                            mentions=i['entities']['user_mentions'],
-                            dateCreated=i['created_at'],
-                            tweetID=i['id'],
-                            tweetLikes=i['favorite_count'],
-                            tweetRe=i['retweet_count'],
-                            tweetTextCount=len(i['text']))
-            newTweet.location = query
-            newTweet.save()
+            try:
+                newTweet = Tweet(tweetCreator=i['user']['screen_name'],
+                                tweetText=i['text'],
+                                creatorFollowers=i['user']['followers_count'],
+                                mentions=i['entities']['user_mentions'],
+                                dateCreated=i['created_at'],
+                                tweetID=i['id'],
+                                tweetLikes=i['favorite_count'],
+                                tweetRe=i['retweet_count'],
+                                tweetTextCount=len(i['text']))
+                newTweet.location = query
+                newTweet.save()
+            except NotUniqueError as e:
+                logging.debug('Unique match found: {}'.format(e))
+                continue
 
-        newTweet.save()
+
     except Exception as e:
-        logging.debug('Issue with: {}'.format(filename))
+        logging.debug('Issue with: {}: {}'.format(filename, e))
         pass
 
 def collectTxt():
