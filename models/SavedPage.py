@@ -6,6 +6,6 @@ class SavedPage(Document):
     '''
     pageType = StringField()
     filterTerm = StringField()
-    filterTime = StringField()
+    dateCreated = StringField()
     location = StringField()
     tweetCreator = StringField()
