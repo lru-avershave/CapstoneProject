@@ -19,11 +19,11 @@ def GetTweet(_id):
                     "else": "$filterTerm"
                 }
             },
-            "filterTime": {
+            "dateCreated": {
                 "$cond": {
-                    "if": { "$eq": [ "", "$filterTime" ]},
+                    "if": { "$eq": [ "", "$dateCreated" ]},
                     "then": "$$REMOVE",
-                    "else": "$filterTime"
+                    "else": "$dateCreated"
                 }
             },
             "location": {
