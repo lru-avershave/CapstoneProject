@@ -67,7 +67,7 @@ Tweet Basic Stats Output ~ Basic
                 <label id = "filters_used">
                 <ul>
                 {% for key, value in filters.items() %}
-                <li>{{ value }}</li>
+                <li>{{key}}: {{ value }}</li>
                 {% endfor %}
                 </ul>
                 </label>
@@ -169,7 +169,7 @@ Tweet Basic Stats Output ~ Basic
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.11.0/js/mdb.min.js"></script>
 <!-- Moment.js -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <!-- Datatable-->
 <script>
@@ -190,7 +190,7 @@ Tweet Basic Stats Output ~ Basic
                     {data: 'Time',
                         "render": function (value) {
                             if (value === null) return "";
-                            return moment(value).format('MMMM Do YYYY, h:mm a');}
+                            return moment(value).utc().format('MMMM Do YYYY, h:mm a');}
                     },
                     {data: 'Likes'},
                     {data: 'Retweets'}
