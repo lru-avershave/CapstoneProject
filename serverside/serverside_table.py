@@ -1,5 +1,5 @@
 import re
-from pandas import to_datetime
+import pandas as pd
 from datetime import datetime
 
 class ServerSideTable(object):
@@ -70,7 +70,7 @@ class ServerSideTable(object):
                     row[column_name] = "<a href='https://www.twitter.com/"+ str(tweetCreator) + "' target='_blank'>"+ str(tweetCreator) +"</a>"
                 elif(data_name == "dateCreated"):
                     date = x.get(data_name, default)
-                    convertedDate = datetime.strptime(date, "%a %b %d %H:%S:%f %z %Y")
+                    convertedDate = datetime.strptime(date, "%A, %B %d, %Y %H:%M")
                     row[column_name] = convertedDate
                 else:
                     row[column_name] = x.get(data_name, default)

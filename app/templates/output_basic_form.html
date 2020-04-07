@@ -168,6 +168,8 @@ Tweet Basic Stats Output ~ Basic
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.11.0/js/mdb.min.js"></script>
+<!-- Moment.js -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
 
 <!-- Datatable-->
 <script>
@@ -185,7 +187,11 @@ Tweet Basic Stats Output ~ Basic
                     {data: 'Word Count'},
                     {data: 'Follower Count'},
                     {data: 'Location'},
-                    {data: 'Time'},
+                    {data: 'Time',
+                        "render": function (value) {
+                            if (value === null) return "";
+                            return moment(value).format('MMMM Do YYYY, h:mm a');}
+                    },
                     {data: 'Likes'},
                     {data: 'Retweets'}
                 ]

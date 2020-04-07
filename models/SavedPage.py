@@ -1,4 +1,4 @@
-from mongoengine import StringField, Document
+from mongoengine import StringField, DateTimeField,Document
 
 class SavedPage(Document):
     '''
@@ -9,3 +9,5 @@ class SavedPage(Document):
     dateCreated = StringField()
     location = StringField()
     tweetCreator = StringField()
+    filterTime = StringField()
+    filterDate = StringField()

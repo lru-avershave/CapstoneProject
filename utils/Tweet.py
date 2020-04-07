@@ -1,6 +1,7 @@
 from models.SavedPage import SavedPage
 from TweetsToDB.TweetModel import Tweet
 from mongoengine import *
+import copy
 
 def GetTweet(_id):
     '''
@@ -19,11 +20,11 @@ def GetTweet(_id):
                     "else": "$filterTerm"
                 }
             },
-            "dateCreated": {
+            "filterTime": {
                 "$cond": {
-                    "if": { "$eq": [ "", "$dateCreated" ]},
+                    "if": { "$eq": [ "", "$filterTime" ]},
                     "then": "$$REMOVE",
-                    "else": "$dateCreated"
+                    "else": "$filterTime"
                 }
             },
             "location": {
@@ -39,14 +40,63 @@ def GetTweet(_id):
                     "then": "$$REMOVE",
                     "else": "$tweetCreator"
                 }
+            },
+            "filterDate": {
+                "$cond": {
+                    "if": { "$eq": [ "", "$filterDate" ]},
+                    "then": "$$REMOVE",
+                    "else": "$filterDate"
+                }
             }
             }
         }
     ]))
-    if "filterTerm" in searchStrings[0]:
+    returnStrings = copy.deepcopy(searchStrings)
+    if "filterTerm" in searchStrings[0].keys() and "filterTime" in searchStrings[0].keys() and "filterDate" in searchStrings[0].keys():
+        filterTerm = searchStrings[0]["filterTerm"]
+        filterTime = searchStrings[0]["filterTime"]
+        filterDate = searchStrings[0]["filterDate"]
+        del searchStrings[0]["filterTerm"]
+        del searchStrings[0]["filterTime"]
+        del searchStrings[0]["filterDate"]
+        reqTweet = Tweet.objects(__raw__ = searchStrings[0]).search_text(filterTerm)
+        reqTweet = reqTweet(dateCreated__icontains=filterTime)
+        reqTweet = reqTweet(dateCreated__icontains=filterDate)
+    elif "filterTerm" in searchStrings[0].keys() and "filterTime" in searchStrings[0].keys():
+        filterTerm = searchStrings[0]["filterTerm"]
+        filterTime = searchStrings[0]["filterTime"]
+        del searchStrings[0]["filterTerm"]
+        del searchStrings[0]["filterTime"]
+        reqTweet = Tweet.objects(__raw__ = searchStrings[0]).search_text(filterTerm)
+        reqTweet = reqTweet(dateCreated__icontains=filterTime)
+    elif "filterDate" in searchStrings[0].keys() and "filterTime" in searchStrings[0].keys():
+        filterTerm = searchStrings[0]["filterDate"]
+        filterTime = searchStrings[0]["filterTime"]
+        del searchStrings[0]["filterTerm"]
+        del searchStrings[0]["filterTime"]
+        reqTweet = Tweet.objects(__raw__ = searchStrings[0])
+        reqTweet = reqTweet(dateCreated__icontains=filterTime)
+        reqTweet = reqTweet(dateCreated__icontains=filterDate)
+    elif "filterDate" in searchStrings[0].keys() and "filterTerm" in searchStrings[0].keys():
+        filterTerm = searchStrings[0]["filterTerm"]
+        filterDate = searchStrings[0]["filterDate"]
+        del searchStrings[0]["filterTerm"]
+        del searchStrings[0]["filterDate"]
+        reqTweet = Tweet.objects(__raw__ = searchStrings[0]).search_text(filterTerm)
+        reqTweet = reqTweet(dateCreated__icontains=filterDate)
+    elif "filterDate" in searchStrings[0].keys():
+        filterDate = searchStrings[0]["filterDate"]
+        del searchStrings[0]["filterDate"]
+        reqTweet = Tweet.objects(__raw__ = searchStrings[0]).search_text(filterDate)
+    elif "filterTerm" in searchStrings[0].keys():
         filterTerm = searchStrings[0]["filterTerm"]
         del searchStrings[0]["filterTerm"]
         reqTweet = Tweet.objects(__raw__ = searchStrings[0]).search_text(filterTerm)
+    elif "filterTime" in searchStrings[0].keys():
+        filterTime = searchStrings[0]["filterTime"]
+        del searchStrings[0]["filterTime"]
+        reqTweet = Tweet.objects(__raw__ = searchStrings[0])
+        reqTweet = reqTweet(dateCreated__contains=filterTime)
     else:
         reqTweet = Tweet.objects(__raw__ = searchStrings[0])
-    return reqTweet, searchStrings
+    return reqTweet, returnStrings

@@ -23,11 +23,12 @@ def index():
 def stats():
    stat_type = request.form.get('statistics')
    filter_term = request.form.get('input_term')
+   filter_time = request.form.get('input_time')
    filter_date = request.form.get('input_date')
    filter_location = request.form.get('input_location')
    filter_profile = request.form.get('input_profile')
   
-   newPage = SavedPage(pageType=stat_type, filterTerm=filter_term, dateCreated=filter_date, location=filter_location, tweetCreator=filter_profile).save()
+   newPage = SavedPage(pageType=stat_type, filterTerm=filter_term, filterTime=filter_time, location=filter_location, tweetCreator=filter_profile, filterDate=filter_date).save()
   
    if stat_type == "basic":
       return redirect((url_for('basic', _id=newPage.id)))

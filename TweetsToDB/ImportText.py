@@ -1,5 +1,5 @@
 import json
-import pandas as pd
+import datetime
 import glob
 import os
 from TweetModel import Tweet
@@ -22,12 +22,15 @@ def TextToTweet(filename):
             query = query.replace('+', ' ')
 
         for i in data['statuses']:
+
+            convertedDate = datetime.datetime.strptime(i['created_at'], "%a %b %d %H:%M:%S %z %Y").strftime("%A, %B %d, %Y %H:%M")
+
             try:
                 newTweet = Tweet(tweetCreator=i['user']['screen_name'],
                                 tweetText=i['text'],
                                 creatorFollowers=i['user']['followers_count'],
                                 mentions=i['entities']['user_mentions'],
-                                dateCreated=i['created_at'],
+                                dateCreated=convertedDate,
                                 tweetID=i['id'],
                                 tweetLikes=i['favorite_count'],
                                 tweetRe=i['retweet_count'],
