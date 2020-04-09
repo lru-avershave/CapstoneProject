@@ -12,6 +12,7 @@ from models.SavedPage import SavedPage
 import pandas as pd
 import ujson
 
+
 #Home page route for start up
 @app.route('/',methods=["GET", "POST"])
 def index():
@@ -121,17 +122,6 @@ def adminlogin():
    session['logged_in'] = True
    return redirect((url_for('admin')))
 
-#Route for downloading the excel file
-#Retrieves the filename and downloads the temporary file to the client
-@app.route('/downloadfiles', methods=['GET', 'POST'])
-def generateFile():
-   fileName = request.form.get('file_name')
-   str_io = exportToFile()
-  
-   return send_file(str_io,
-                 attachment_filename=fileName + '.xlsx',
-                 as_attachment=True)
-   
 #Route used to logout on the admin page
 #Changes login to false and redirects to home page
 @app.route('/admin/logout', methods=['GET', 'POST'])
