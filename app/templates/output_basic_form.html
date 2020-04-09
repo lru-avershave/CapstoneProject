@@ -87,6 +87,17 @@ Tweet Basic Stats Output ~ Basic
         </div>
     </div>
         
+
+    <!--Card for save data to file-->
+    <div class ="row d-flex justify-content-center">
+        <div class = "card mb-4">
+            <div class = "card-body text-center">
+                <label>Custom File Name for Saving: </label>
+                <input type = "text" id = "file_name" value = ""><br>
+            </div>
+        </div>
+    </div>
+
 <!-- Table for basic statistics-->
     <div class = row>
         <table id="table_tweets" class="table table-striped table-bordered table-sm " cellspacing="0" width="100%">
@@ -151,6 +162,7 @@ Tweet Basic Stats Output ~ Basic
 <!-- Moment.js -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
+<!--Export Buttons-->
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script> 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script type ="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -184,12 +196,41 @@ Tweet Basic Stats Output ~ Basic
                 lengthMenu: [[25, 50, 100, 500, 1000, 5000, 10000, -1], [25, 50, 100, 500, 1000, 5000, 10000, "all"]],
                 pageLength: 25,
                 buttons: [
-                     'pageLength', 'excel', 'csv', 'pdf', 'copy'
+                     'pageLength', {
+                        extend: 'excel',
+                        filename: function(){
+                            return getInputValue();
+                        }
+                     }, 
+                     {
+                        extend: 'csv',
+                        filename: function(){
+                            return getInputValue();
+                        }
+                     },
+                     {
+                        extend: 'pdf',
+                        filename: function(){
+                            return getInputValue();
+                        }
+                     },
+                    'copy'
                 ],
             });
 
     });
     $('.dataTables_length').addClass('bs-select');
+</script>
+
+<script>
+    function getInputValue(){
+        // Selecting the input element and get its value 
+        var inputVal = document.getElementById("file_name").value;
+        if (inputVal == '')
+            inputVal = 'TweetsBasicStats'
+        // Displaying the value
+        return inputVal;
+    }
 </script>
 
 <!-- Toggles the expand state for collapse menu-->
@@ -266,8 +307,9 @@ Tweet Basic Stats Output ~ Basic
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.11.0/css/mdb.min.css" rel="stylesheet">
 <!-- Datatables -->
 <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
-
+<!--Export buttons-->
 <link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" rel = "stylesheet">
+
 <!-- Datatable Style-->
 <style>
     .table_tweetsWrapper{
