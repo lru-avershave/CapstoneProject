@@ -8,18 +8,34 @@ def statTweets(jsonTweet):
     options = ['tweetLikes', 'tweetRe']
     normalTweet = json_normalize(jsonTweet)
     df = pd.DataFrame(normalTweet)
+
+    
     mean, median, mode, deviation, variance, quartile1, quartile3, ranges, outliers = [], [], [], [], [], [], [], [], []
     stats = {'mean': None, 'median': None, 'mode': None, 'deviation': None, 'variance': None, 'quartile1': None, 'quartile3': None, "ranges": None,"outliers": None}
+    
     for o in options:
         mean.append(df[o].mean())
         median.append(df[o].median())
         mode.append(df[o].mode())
         deviation.append(df[o].mad())
         variance.append(df[o].var)
-        quartile1.append(df[o].quantile([0.25]))
-        quartile3.append(df[o].quantile([0.75]))
+
+        Q1 = df[o].quantile([0.25])
+        quartile1.append(Q1)
+        Q3 = df[o].quantile([0.75])
+        quartile3.append(Q3)
+
         ranges.append(df[o].max() - df[o].min())
+        
         #Outlier stuff
+        iqr = Q3 - Q1
+        lower_bound = Q1 - (1.5 * iqr)
+        upper_bound = Q3 + (1.5 * iqr)
+        outlierCount = 0
+        for value in df[o]:
+            if(value < lower_bound) or (value > upper_bound):
+                outlierCount += 1
+        outliers.append(outlierCount)
 
     stats['mean'] = dict(zip(options, mean))
     stats['median'] = dict(zip(options, median))
