@@ -10,6 +10,8 @@ from serverside.serverside_table import ServerSideTable
 from models.SavedPage import SavedPage
 import pandas as pd
 import ujson
+import time
+from datetime import date, datetime
 
 
 #Home page route for start up
@@ -29,8 +31,14 @@ def stats():
    filter_date = request.form.get('input_date')
    filter_location = request.form.get('input_location')
    filter_profile = request.form.get('input_profile')
-  
-   newPage = SavedPage(pageType=stat_type, filterTerm=filter_term, filterTime=filter_time, location=filter_location, tweetCreator=filter_profile, filterDate=filter_date).save()
+
+   #Date stuff for saved page
+   fdate= date.today().strftime('%Y-%m-%d')
+   ftime = time.strftime("%H:%M")
+
+   timestamp = fdate + " | " + ftime
+
+   newPage = SavedPage(pageType=stat_type, timestamp = timestamp, filterTerm=filter_term, filterTime=filter_time, location=filter_location, tweetCreator=filter_profile, filterDate=filter_date).save()
   
    if stat_type == "basic":
       return redirect((url_for('basic', _id=newPage.id)))
@@ -81,16 +89,16 @@ def descriptive(_id):
 def admin_delete_page(_id):
    reqTweet, reqPage = GetTweet(_id)
 
-   stats = statTweets(toTweetJson(reqTweet, _id))
-
    if reqTweet.count() == 0:
       flash('No results found!')
-      return redirect((url_for("index")))
+      return redirect((url_for("admin")))
    
    #This is hard coded and needs to be changed
    if reqTweet.count() > 290000:
       flash('WARNING: This queired the entire database! Please limit your options...')
-      return redirect((url_for("index")))
+      return redirect((url_for("admin")))
+
+   stats = statTweets(toTweetJson(reqTweet, _id))
 
    return render_template('output_admin_form.html', _id=_id, filters=reqPage[0])
 
@@ -171,7 +179,27 @@ def deleteTweet():
     _tweetID = request.args.get('tweetID')
     deleteTweet = Tweet.objects(tweetID = _tweetID).first().delete()
     return 'TEST'
-    
+
+ 
+@app.route('/deletePages', methods=['GET', 'POST'])
+def deletePages():
+   currentdate = request.form.get('input_date')
+   currenttime = request.form.get('input_time')
+   
+   if currenttime [0:2] == "12":
+      if currenttime[5:7] == "am":
+         currenttime[0:2] == "00"
+
+   elif currenttime[5:7] == "pm":
+      number = currenttime[0:2]
+      currenttime[0:2] = number + 12
+
+   times = currentdate + " | " + currenttime[0:5]
+   
+   print(times)
+   ###CHECK if timestamp of saved pages is less than times
+   
+   return redirect(url_for('admin'))
 
 '''
 This method is used strictly to cache the json data.

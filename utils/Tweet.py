@@ -15,6 +15,7 @@ def GetTweet(_id):
             "$project": {
             "_id": "$$REMOVE",
             "pageType": "$$REMOVE",
+            "timestamp": "$$REMOVE",
             "filterTerm": {
                 "$cond": {
                     "if": { "$eq": [ "", "$filterTerm" ]},
