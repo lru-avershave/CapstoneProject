@@ -5,8 +5,8 @@ import json
 
 #Need to create a dataframe in order to compute stats
 def statTweets(jsonTweet):
-    options = ['tweetLikes', 'tweetRe']
-    formatted_options = ['Likes','Retweets']
+    options = ['tweetLikes', 'tweetRe', 'tweetTextCount']
+    formatted_options = ['Likes','Retweets', 'Character Count']
     normalTweet = json_normalize(jsonTweet)
     df = pd.DataFrame(normalTweet)
     stats = []
@@ -18,7 +18,6 @@ def statTweets(jsonTweet):
         optionStats.append(formatted_options[counter])
         counter += 1
         
-        optionStats.append(df[o].mean())
         optionStats.append(df[o].median())
         optionStats.append(df[o].mode()[0])
         optionStats.append(df[o].mad())
@@ -26,9 +25,12 @@ def statTweets(jsonTweet):
 
         Q1 = df[o].quantile([0.25][0])
         optionStats.append(Q1)
+        optionStats.append(df[o].mean())
         Q3 = df[o].quantile([0.75][0])
         optionStats.append(Q3)
 
+        optionStats.append(df[o].max())
+        optionStats.append(df[o].min())
         optionStats.append(df[o].max() - df[o].min())
         
         # #Outlier stuff
