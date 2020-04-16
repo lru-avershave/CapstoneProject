@@ -33,10 +33,7 @@ def stats():
    filter_profile = request.form.get('input_profile')
 
    #Date stuff for saved page
-   fdate= date.today().strftime('%Y-%m-%d')
-   ftime = time.strftime("%H:%M")
-
-   timestamp = fdate + " | " + ftime
+   timestamp = datetime.now()
 
    newPage = SavedPage(pageType=stat_type, timestamp = timestamp, filterTerm=filter_term, filterTime=filter_time, location=filter_location, tweetCreator=filter_profile, filterDate=filter_date).save()
   
@@ -87,6 +84,14 @@ def descriptive(_id):
 
 @app.route('/admin/<_id>',methods=["GET", "POST"])
 def admin_delete_page(_id):
+   if 'logged_in' not in session:
+      flash("Please log in and try again")
+      return redirect(url_for('admin'))
+   
+   if session['logged_in'] == False:
+      flash("Please log in and try again")
+      return redirect(url_for('admin'))
+   
    reqTweet, reqPage = GetTweet(_id)
 
    if reqTweet.count() == 0:
@@ -115,7 +120,7 @@ def id():
    
    if reqPage[0]['pageType'] == "descriptive":
       return redirect((url_for('descriptive', _id=_id)))
-   
+
    if reqPage[0]['pageType'] == "Admin":
       return redirect((url_for('admin', _id=_id)))
 
@@ -183,21 +188,22 @@ def deleteTweet():
  
 @app.route('/deletePages', methods=['GET', 'POST'])
 def deletePages():
+   if 'logged_in' not in session:
+      flash("Please log in and try again")
+      return redirect(url_for('admin'))
+   
    currentdate = request.form.get('input_date')
    currenttime = request.form.get('input_time')
-   
-   if currenttime [0:2] == "12":
-      if currenttime[5:7] == "am":
-         currenttime[0:2] == "00"
 
-   elif currenttime[5:7] == "pm":
-      number = currenttime[0:2]
-      currenttime[0:2] = number + 12
+   currentdatetime = currentdate + " | " + currenttime
+   try:
+      convertedCurrentDateTime = datetime.strptime(currentdatetime, "%Y-%m-%d | %H:%M")
+      grabPages = SavedPage.objects(timestamp__lte=convertedCurrentDateTime).delete()
+   except ValueError:
+      flash("Please fill out the entire form.")
+      return redirect(url_for('admin'))
 
-   times = currentdate + " | " + currenttime[0:5]
-   
-   print(times)
-   ###CHECK if timestamp of saved pages is less than times
+   print(convertedCurrentDateTime)
    
    return redirect(url_for('admin'))
 

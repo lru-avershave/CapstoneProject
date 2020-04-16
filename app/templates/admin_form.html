@@ -61,6 +61,17 @@ Tweet Basic Stats ~ Admin Page
                     <br>
                     <input type = "submit" name = "delete_pages" value = "Delete Pages">
                 </form>
+                <h3>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <strong>
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </strong>
+                    {% endif %}
+                    {% endwith %}
+                </h3>
             </div>
         </div>
 
