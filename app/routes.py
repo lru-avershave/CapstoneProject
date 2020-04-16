@@ -60,6 +60,8 @@ def basic(_id):
 def descriptive(_id):
    reqTweet, reqPage = GetTweet(_id)
 
+   stats = statTweets(toTweetJson(reqTweet, _id))
+
    if reqTweet.count() == 0:
       flash('No results found!')
       return redirect((url_for("index")))
