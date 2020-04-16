@@ -41,24 +41,26 @@ Tweet Basic Stats ~ Admin Page
         <!-- Clear out previous output pages buttons and input fields -->
         <div class = "card mb-4">
             <div class = "card-body text-center">
-                <div class="help-tip">
-                    <p>Clear out previous output stored pages that were created before the date below.</p>
-                </div> 
-                <br>
-                <h3>Clear Filtered Pages Older than:</h3>
-                <div class="row">
-                    Date:
-                    &nbsp&nbsp       
-                    <input type = "date" name = "input_date" value ="">
-                </div>
-                <br>
-                <div class="row">
-                    Time:     
-                    &nbsp&nbsp  
-                    <input type = "time" name = "input_time" value ="">
-                </div>
-                <br>
-                <input type = "submit" name = "delete_pages" value = "Delete Pages">
+                <form action="{{ url_for('deletePages') }}" method="POST">
+                    <div class="help-tip">
+                        <p>Clear out previous output stored pages that were created before the date below.</p>
+                    </div> 
+                    <br>
+                    <h3>Clear Filtered Pages Older than:</h3>
+                    <div class="row">
+                        Date:
+                        &nbsp&nbsp       
+                        <input type = "date" name = "input_date" value ="">
+                    </div>
+                    <br>
+                    <div class="row">
+                        Time:     
+                        &nbsp&nbsp  
+                        <input type = "time" name = "input_time" value ="">
+                    </div>
+                    <br>
+                    <input type = "submit" name = "delete_pages" value = "Delete Pages">
+                </form>
             </div>
         </div>
 
