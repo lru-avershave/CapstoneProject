@@ -177,7 +177,7 @@ Tweet Basic Stats Output ~ Basic
 <!-- Datatable-->
 <script>
     $(document).ready(function () {
-            $('#table_tweets').DataTable({
+            var table = $('#table_tweets').DataTable({
                 bProcessing: true,
                 bServerSide: true,
                 sPaginationType: "full_numbers",
@@ -218,12 +218,24 @@ Tweet Basic Stats Output ~ Basic
                             return getInputValue();
                         }
                      },
-                    'copy'
+                    'copy',
+                    {
+                        text: 'My button',
+                        action: function ( e, dt, node, config ) {
+                            console.log(table.rows('.selected').data());
+                        }
+                    },
                 ],
             });
 
+            $('#table_tweets tbody').on( 'click', 'tr', function () {
+            $(this).toggleClass('selected');
+            } );
+            
+
     });
     $('.dataTables_length').addClass('bs-select');
+    
 </script>
 
 <script>

@@ -1,27 +1,28 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-Tweet Basic Stats Output ~ Descriptive
+Tweet Basic Stats Output ~ Basic
 {% endblock title %}
 
 {% block content %}
-<div class="container">
 
-    <!-- Heading-->
+<div class = "container">
+
+    <!-- Heading -->
     <div class = "row d-flex justify-content-center">
-        <h2 style="text-align: center;">Data (Descriptive Statistics)</h2>
+        <h2 style="text-align: center;">Admin Tweet Deletion Page</h2>
     </div>
-    
-    <div class = "card-deck"> 
 
+   <div class = "card-deck">
+           
         <!--Card for generated output-->
         <div class = "card mb-4">
-            <div class = "card-body">
-                <form action="{{ url_for('index') }}" method="POST">
+            <div class = "card-body">               
+                <form action="{{ url_for('admin') }}" method="POST">    
                     <div class="help-tip">
                         <p>Use the ID below to reload this results in the future.</p>
                     </div>
-                    <br>                  
+                    <br>   
                     <h5>Generated Output ID:</h5>
                     <br>
                     <label id = output_id>{{ _id }}</label>
@@ -33,98 +34,70 @@ Tweet Basic Stats Output ~ Descriptive
 
         <!--Card for filters-->
         <div class = "card mb-4">
-            <div class = "card-body">
+            <div class = "card-body">         
                 <div class="help-tip">
                     <p>Below are the filters that your results are limited by.</p>
                 </div>
-                <br>         
+                <br>
                 <h5>Filters Used:</h4>
                 <br>
+                <label id = "filters_used">
                 <ul>
                 {% for key, value in filters.items() %}
                 <li>{{key}}: {{ value }}</li>
                 {% endfor %}
                 </ul>
-           </div>
-        </div>
-
-    </div>
-    
-    <!--Card for save data to file-->
-    <div class ="row d-flex justify-content-center">
-        <div class = "card mb-4">
-            <div class = "card-body text-center">
-                <div class="help-tip">
-                    <p>Type a custom name here for file downloads before choosing your format.  Warning: Be cautious of saving large amounts of tweets at once.  It is recommended you split these into multiple small saves.</p>
-                </div>
-                <label>Custom File Name for Saving: </label>
-                <input type = "text" id = "file_name" value = ""><br>
+                </label>
             </div>
         </div>
+
+    </div> 
+
+<!-- Table for basic statistics-->
+    <div class = row>
+        <table id="table_tweets" class="table table-striped table-bordered table-sm " cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th class="th-sm">Tweet ID
+                    </th>
+                    <th class="th-sm">Profile Name
+                    </th>
+                    <th class="th-sm">Word Count
+                    </th>
+                    <th class="th-sm">Follower Count
+                    </th>
+                    <th class="th-sm">Location
+                    </th>
+                    <th class="th-sm">Time
+                    </th>
+                    <th class="th-sm">Likes
+                    </th>
+                    <th class="th-sm">Retweets
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Tweet ID
+                    </th>
+                    <th>Profile Name
+                    </th>
+                    <th>Word Count
+                    </th>
+                    <th>Follower Count
+                    </th>
+                    <th>Location
+                    </th>
+                    <th>Time
+                    </th>
+                    <th>Likes
+                    </th>
+                    <th>Retweets
+                    </th>
+                </tr>
+            </tfoot>
+        </table>  
     </div>
-
-    <!--Datatable for descriptive stastitics-->
-    <table id="table_tweets2" class="table table-striped table-bordered table-sm " cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th class="th-sm">Stats Based On
-                </th>
-                <th class="th-sm">Mean
-                </th>
-                <th class="th-sm">Median
-                </th>
-                <th class="th-sm">Mode
-                </th>
-                <th class="th-sm">Absolute Deviation
-                </th>
-                <th class="th-sm">Standard Deviation
-                </th>
-                <th class="th-sm">Quartile 1
-                </th>
-                <th class="th-sm">Quartile 3
-                </th>
-                <th class="th-sm">Range
-                </th>
-                <th class="th-sm">Outlier Count
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-                {% for stat in stats %}
-                    <tr>
-                    {% for i in stat %}
-                        <td>{{ i }}</td>
-                    {% endfor %}
-                    </tr>
-                {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr>
-
-                <th>Stats Based On
-                </th>
-                <th>Mean
-                </th>
-                <th>Median
-                </th>
-                <th>Mode
-                </th>
-                <th>Absolute Deviation
-                </th>
-                <th>Standard Deviation
-                </th>
-                <th>Quartile 1
-                </th>
-                <th>Quartile 3
-                </th>
-                <th>Range
-                </th>
-                <th>Outlier Count
-                </th>
-            </tr>
-        </tfoot>
-    </table> 
-
 </div>
 
 {% endblock content %}
@@ -151,51 +124,62 @@ Tweet Basic Stats Output ~ Descriptive
 <script type ="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
 
-<!--Datatable-->
+
+<!-- Datatable-->
 <script>
     $(document).ready(function () {
-    $('#table_tweets2').DataTable({
-    dom: 'Bfrtip',
-    buttons: [
-                     {
-                        extend: 'excel',
-                        filename: function(){
-                            return getInputValue();
-                        }
-                     }, 
-                     {
-                        extend: 'csv',
-                        filename: function(){
-                            return getInputValue();
-                        }
-                     },
-                     {
-                        extend: 'pdf',
-                        filename: function(){
-                            return getInputValue();
-                        }
-                     },
-                    'copy'
+            var table = $('#table_tweets').DataTable({
+                bProcessing: true,
+                bServerSide: true,
+                sPaginationType: "full_numbers",
+                dom: 'Bfrtip',
+                sAjaxSource: "{{ url_for('adminserverside',  _id = _id) }}",
+                columns: [
+                    {data: 'Tweet ID'},
+                    {data: 'Profile Name'},
+                    {data: 'Word Count'},
+                    {data: 'Follower Count'},
+                    {data: 'Location'},
+                    {data: 'Time',
+                        "render": function (value) {
+                            if (value === null) return "";
+                            return moment(value).utc().format('MMMM Do YYYY, h:mm a');}
+                    },
+                    {data: 'Likes'},
+                    {data: 'Retweets'}
                 ],
+                pageLength: 25,
+                buttons: [
+                    {
+                        text: 'My button',
+                        action: function ( e, dt, node, config ) {
+                            $.ajaxSetup({async: false});
+                            var selected = table.rows('.selected').data();
+                            for (index = 0, len = selected.length; index < len; ++index) {
+                                var str = selected[index]["Tweet ID"];
+                                var tweetID = $(str).text();
+                                $.get("{{ url_for('deleteTweet') }}", {tweetID: tweetID});
+                            }
+                            window.location.replace("{{ url_for('admin_delete_page', _id = _id) }}");
+                        }
+                    },
+                ],
+            });
+
+            $('#table_tweets tbody').on( 'click', 'tr', function () {
+            $(this).toggleClass('selected');
+            } );
+            
+
     });
     $('.dataTables_length').addClass('bs-select');
-    });
-</script>
-
-<script>
-    function getInputValue(){
-        // Selecting the input element and get its value 
-        var inputVal = document.getElementById("file_name").value;
-        if (inputVal == '')
-            inputVal = 'TweetsBasicStats'
-        // Displaying the value
-        return inputVal;
-    }
+    
 </script>
 
 {% endblock scripts %}
 
 {% block styles %}
+
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Google Fonts -->
@@ -209,13 +193,13 @@ Tweet Basic Stats Output ~ Descriptive
 <!--Export buttons-->
 <link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" rel = "stylesheet">
 
-<!--Datatable styles-->
+<!-- Datatable Style-->
 <style>
-    .table_tweets2Wrapper{
+    .table_tweetsWrapper{
     max-width: 600px;
     margin: 0 auto;
     }
-    #table_tweets2 th, td {
+    #table_tweets th, td {
     white-space: nowrap;
     }
     table.dataTable thead .sorting:after,
@@ -232,7 +216,7 @@ Tweet Basic Stats Output ~ Descriptive
     }
 </style>
 
-<!--Help button-->
+<!-- Help button-->
 <style>
     .help-tip{
         position: absolute;

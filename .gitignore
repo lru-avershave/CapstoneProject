@@ -2,6 +2,9 @@
 # Created by https://www.gitignore.io/api/venv,flask,python,windows
 # Edit at https://www.gitignore.io/?templates=venv,flask,python,windows
 
+### VS Code ###
+.vscode
+
 ### Flask ###
 instance/*
 !instance/.gitignore

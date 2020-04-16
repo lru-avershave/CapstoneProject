@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_pymongo import PyMongo
 from flask_caching import Cache
+from flask_cors import CORS
 import os
 from mongoengine import *
 
@@ -18,5 +19,6 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/testDB"
 mongo = PyMongo(app)
 cache = Cache()
 cache.init_app(app)
+CORS(app)
 
 from app import routes
