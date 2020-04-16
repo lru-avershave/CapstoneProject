@@ -50,7 +50,6 @@ Tweet Basic Stats Output ~ Basic
                 </label>
             </div>
         </div>
-
     </div> 
 
 <!-- Table for basic statistics-->
@@ -149,9 +148,11 @@ Tweet Basic Stats Output ~ Basic
                     {data: 'Retweets'}
                 ],
                 pageLength: 25,
+                lengthMenu: [[25, 50, 100, 500, 1000, 5000, 10000, -1], [25, 50, 100, 500, 1000, 5000, 10000, "all"]],
                 buttons: [
+                    'pageLength',
                     {
-                        text: 'My button',
+                        text: 'Delete Selected',
                         action: function ( e, dt, node, config ) {
                             $.ajaxSetup({async: false});
                             var selected = table.rows('.selected').data();

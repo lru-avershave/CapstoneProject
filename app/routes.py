@@ -81,16 +81,16 @@ def descriptive(_id):
 def admin_delete_page(_id):
    reqTweet, reqPage = GetTweet(_id)
 
-   stats = statTweets(toTweetJson(reqTweet, _id))
-
    if reqTweet.count() == 0:
       flash('No results found!')
-      return redirect((url_for("index")))
+      return redirect((url_for("admin")))
    
    #This is hard coded and needs to be changed
    if reqTweet.count() > 290000:
       flash('WARNING: This queired the entire database! Please limit your options...')
-      return redirect((url_for("index")))
+      return redirect((url_for("admin")))
+
+   stats = statTweets(toTweetJson(reqTweet, _id))
 
    return render_template('output_admin_form.html', _id=_id, filters=reqPage[0])
 

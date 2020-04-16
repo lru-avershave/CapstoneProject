@@ -20,6 +20,22 @@ Tweet Basic Stats ~ Admin Page
         <h1>Admin Tools</h1>
     </div>
 
+
+    <!-- Message for when 0 tweets are returned-->
+    <div class = "row d-flex justify-content-center">
+        <h2>
+            {% with messages = get_flashed_messages() %}
+               {% if messages %}
+                <strong>
+                     {% for message in messages %}
+                        {{ message }}
+                     {% endfor %}
+                </strong>
+               {% endif %}
+            {% endwith %}
+        </h2>
+    </div>
+
     <div class = "card-deck">
 
         <!-- Clear out previous output pages buttons and input fields -->
@@ -47,11 +63,11 @@ Tweet Basic Stats ~ Admin Page
         </div>
 
         <!-- Tweet query filters to populate the table with tweets to be deleted -->
-        <form action="{{ url_for('stats') }}" method="POST">
-            <div class = "card mb-4">
-                <div class = "card-body text-center">          
+        <div class = "card mb-4">
+            <div class = "card-body text-center">          
+                <form action="{{ url_for('stats') }}" method="POST">
                     <div class="help-tip">
-                        <p>Query for tweets based on the limits below to populate the table below with results.</p>
+                        <p>Query for tweets based on the limits below to populate a table with results that can be selected for deletion.</p>
                     </div>  
                     <br>  
                     <h3>Clear Tweets</h3>
@@ -87,10 +103,10 @@ Tweet Basic Stats ~ Admin Page
                         <input type = "profile" name = "input_profile" value ="">
                     </div>
                     <br>
-                    <input type = "submit" value = "Create a Table to Delete Tweets" class = "button">
-                </div>
+                    <input type = "submit" value = "Generate Matching Results to Select Tweets" class = "button">
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 
 

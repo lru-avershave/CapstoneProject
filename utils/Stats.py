@@ -6,13 +6,18 @@ import json
 #Need to create a dataframe in order to compute stats
 def statTweets(jsonTweet):
     options = ['tweetLikes', 'tweetRe']
+    formatted_options = ['Likes','Retweets']
     normalTweet = json_normalize(jsonTweet)
     df = pd.DataFrame(normalTweet)
     stats = []
 
+    counter = 0
+
     for o in options:
         optionStats = []
-        optionStats.append(o)
+        optionStats.append(formatted_options[counter])
+        counter += 1
+        
         optionStats.append(df[o].mean())
         optionStats.append(df[o].median())
         optionStats.append(df[o].mode()[0])
