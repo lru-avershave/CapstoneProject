@@ -19,15 +19,8 @@ Tweet Basic Stats Output ~ Basic
         <div class = "card mb-4">
             <div class = "card-body">               
                 <form action="{{ url_for('admin') }}" method="POST">    
-                    <div class="help-tip">
-                        <p>Use the ID below to reload this results in the future.</p>
-                    </div>
-                    <br>   
-                    <h5>Generated Output ID:</h5>
-                    <br>
-                    <label id = output_id>{{ _id }}</label>
-                    <br>
-                    <input type = "submit" name = "return" value = "Return to Input">
+                    <h5>Go Back to Admin Page</h5>
+                    <input type = "submit" name = "return" value = "Return">
                 </form>
             </div>
         </div>
