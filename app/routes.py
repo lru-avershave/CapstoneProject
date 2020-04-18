@@ -200,7 +200,7 @@ def deletePages():
       convertedCurrentDateTime = datetime.strptime(currentdatetime, "%Y-%m-%d | %H:%M")
       grabPages = SavedPage.objects(timestamp__lte=convertedCurrentDateTime).delete()
    except ValueError:
-      flash("Please fill out the entire form.")
+      flash("Please fill out the both the time and date fields.")
       return redirect(url_for('admin'))
 
    print(convertedCurrentDateTime)
