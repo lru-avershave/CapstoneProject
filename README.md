@@ -19,19 +19,16 @@ Python Packages being used:
 + Flask-Bootstrap
 + Pandas
 + MongoEngine
-+ OrJSON
++ uJSON
 + flask_caching
 + python-dotenv
 + Watchdog
 + Openpyxl
-+ This is could be added onto depending on what packages we need in the future
++ Please check the requirements.txt for a list of ALL packages
 
 Software being used:
 ===
 + Python
-+ Jinja framework
-    + This is going to be the frontend
-    + https://www.palletsprojects.com/p/jinja/
 + PHP script gathering data using the Twitter API
 + MongoDB Community Server
     + If we can host the MongoDB on the AWS server, we would install this and use this to be admin.
@@ -42,3 +39,9 @@ Hardware being used:
     + These are going to be used to connect to the AWS database in order to view the data.
     + Understood that we do not change that data
 + Provided AWS server
+
+Developer Install Guide:
+===
++ Please install the Python packages with pip install -r requirements.txt
+    + Note: I would create a venv and install the packages in there
++ Once you install the packages, all you have to do is type flask run and you should be set!
