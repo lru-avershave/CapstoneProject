@@ -69,8 +69,6 @@ def basic(_id):
 def descriptive(_id):
    reqTweet, reqPage = GetTweet(_id)
 
-   stats = statTweets(toTweetJson(reqTweet, _id))
-
    if reqTweet.count() == 0:
       flash('No results found!')
       return redirect((url_for("index")))
@@ -79,6 +77,8 @@ def descriptive(_id):
    if reqTweet.count() > 290000:
       flash('WARNING: This queired the entire database! Please limit your options...')
       return redirect((url_for("index")))
+
+   stats = statTweets(toTweetJson(reqTweet, _id))
 
    return render_template('output_descriptive_form.html', _id=_id, filters=reqPage[0], stats=stats)
 
@@ -112,17 +112,28 @@ API that uses the ID in the url and redirects the user to the correct saved page
 '''
 @app.route('/id', methods=['POST'])
 def id():
-   _id = request.form.get('old_output')
-   reqPage = SavedPage.objects(id=_id)
+   try:
+      _id = request.form.get('old_output')
+      reqPage = SavedPage.objects(id=_id)
+   except:
+      flash('Wrong ID input!')
+      return redirect((url_for("index")))
+   try:
+      if reqPage.count() == 0:
+         flash('No results found!')
+         return redirect((url_for("index")))
 
-   if reqPage[0]['pageType'] == "basic":
-      return redirect(url_for('basic', _id=_id))
-   
-   if reqPage[0]['pageType'] == "descriptive":
-      return redirect((url_for('descriptive', _id=_id)))
+      if reqPage[0]['pageType'] == "basic":
+         return redirect(url_for('basic', _id=_id))
+      
+      if reqPage[0]['pageType'] == "descriptive":
+         return redirect((url_for('descriptive', _id=_id)))
 
-   if reqPage[0]['pageType'] == "Admin":
-      return redirect((url_for('admin', _id=_id)))
+      if reqPage[0]['pageType'] == "Admin":
+         return redirect((url_for('admin', _id=_id)))
+   except:
+      flash('Wrong ID input!')
+      return redirect((url_for("index")))
 
 '''
 The index page uses a DataTable that does an ajax call in order to put data into the table.

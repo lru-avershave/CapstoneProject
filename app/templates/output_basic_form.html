@@ -204,6 +204,13 @@ Tweet Basic Stats Output ~ Basic
                         extend: 'excel',
                         filename: function(){
                             return getInputValue();
+                        },
+                        customizeData: function(data) {
+                            for(var i = 0; i < data.body.length; i++) {
+                            for(var j = 0; j < data.body[i].length; j++) {
+                                data.body[i][j] = '\u200C' + data.body[i][j];
+                                }
+                            }
                         }
                      }, 
                      {

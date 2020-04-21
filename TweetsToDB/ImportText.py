@@ -51,6 +51,6 @@ def collectTxt():
     This small function takes the .txt files from whatever dir you change into into Tweet objects into the db.
     This drives this module.
     '''
-    os.chdir("C:\\Users\\austi\\OneDrive\\Spring(COVID)\\Text")
+    os.chdir("C:/Users/austi/Desktop/Text")
     for file in glob.glob('*.txt'):
         TextToTweet(file)
